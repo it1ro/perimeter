@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { m } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import type { ArticleFrontmatter } from '@/types/article';
-import { ArticleCard } from './ArticleCard';
+import { ArticleCard } from '@/components/articles/ArticleCard';
 
 interface LatestArticlesProps {
   articles: ArticleFrontmatter[];
@@ -47,7 +47,7 @@ export function LatestArticles({ articles }: LatestArticlesProps) {
           transition={{ duration: 0.4, delay: 0.15 }}
         >
           {articles.map((frontmatter) => (
-            <ArticleCard key={frontmatter.slug} frontmatter={frontmatter} />
+            <ArticleCard key={frontmatter.slug} frontmatter={frontmatter} variant="compact" />
           ))}
         </m.div>
 

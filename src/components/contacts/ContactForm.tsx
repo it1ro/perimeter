@@ -1,12 +1,14 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
-import { Send, Loader2 } from 'lucide-react';
+import { Send, Loader2, AlertTriangle } from 'lucide-react';
 import { showToast } from '@/components/ui/Toast';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
-const FORMSPREE_URL = 'https://formspree.io/f/{ID}';
+const FORMSPREE_URL = process.env.NEXT_PUBLIC_FORMSPREE_ID
+  ? `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`
+  : '';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_MESSAGE_LENGTH = 10;
@@ -34,6 +36,22 @@ export function ContactForm() {
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<FormStatus>('idle');
   const [errors, setErrors] = useState<FormErrors>({});
+
+  if (!FORMSPREE_URL) {
+    return (
+      <div className="rounded-2xl border border-terracotta/20 bg-terracotta/5 p-6 sm:p-8">
+        <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-terracotta/15">
+          <AlertTriangle className="h-5 w-5 text-terracotta" strokeWidth={1.75} />
+        </div>
+        <h3 className="font-display mb-2 text-lg font-semibold text-text">
+          Форма временно недоступна
+        </h3>
+        <p className="text-sm leading-relaxed text-text-muted">
+          Пожалуйста, свяжитесь с нами другим способом. Мы работаем над восстановлением формы.
+        </p>
+      </div>
+    );
+  }
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

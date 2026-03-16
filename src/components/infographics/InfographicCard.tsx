@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { X, ZoomIn } from 'lucide-react';
 import { m, AnimatePresence } from 'framer-motion';
@@ -14,6 +14,38 @@ interface InfographicCardProps {
 
 export function InfographicCard({ src, alt, title, description }: InfographicCardProps) {
   const [open, setOpen] = useState(false);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const previouslyFocusedElementRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (open) {
+      previouslyFocusedElementRef.current = document.activeElement as HTMLElement | null;
+      if (closeButtonRef.current) {
+        closeButtonRef.current.focus();
+      }
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          setOpen(false);
+        }
+      };
+
+      document.addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+        document.body.style.overflow = originalOverflow;
+        if (previouslyFocusedElementRef.current) {
+          previouslyFocusedElementRef.current.focus();
+        }
+      };
+    }
+
+    return undefined;
+  }, [open]);
 
   return (
     <>
@@ -67,6 +99,7 @@ export function InfographicCard({ src, alt, title, description }: InfographicCar
             >
               <button
                 type="button"
+                ref={closeButtonRef}
                 onClick={() => setOpen(false)}
                 className="absolute -right-2 -top-2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background-soft text-text-muted transition-colors hover:bg-white/20 hover:text-text"
                 aria-label="Закрыть"

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: 'Тесты | Периметр',
     description:
       'Психологические тесты с научной базой — пройдите онлайн, узнайте результат мгновенно.',
-    images: [{ url: '/images/og/og-default.svg', width: 1200, height: 630, alt: 'Периметр — Тесты' }],
+    images: [{ url: '/images/og/og-default.png', width: 1200, height: 630, alt: 'Периметр — Тесты' }],
   },
 };
 

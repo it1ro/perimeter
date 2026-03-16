@@ -5,6 +5,8 @@ import type { Metadata } from 'next';
 import { ArrowLeft } from 'lucide-react';
 import { getAllArticles, getArticleBySlug } from '@/lib/articles';
 import { ArticleContent } from '@/components/articles/ArticleContent';
+import { SITE_URL, SITE_NAME } from '@/lib/constants';
+import { formatDate } from '@/lib/format';
 
 interface PageProps {
   params: { slug: string };
@@ -42,14 +44,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-function formatDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString('ru-RU', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
-}
-
 export default function ArticlePage({ params }: PageProps) {
   const article = getArticleBySlug(params.slug);
   if (!article) notFound();
@@ -62,20 +56,20 @@ export default function ArticlePage({ params }: PageProps) {
     headline: frontmatter.title,
     description: frontmatter.description,
     datePublished: frontmatter.date,
-    url: `https://периметр.рф/articles/${frontmatter.slug}/`,
+    url: `${SITE_URL}/articles/${frontmatter.slug}/`,
     author: {
       '@type': 'Organization',
-      name: 'Периметр',
-      url: 'https://периметр.рф',
+      name: SITE_NAME,
+      url: SITE_URL,
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Периметр',
-      url: 'https://периметр.рф',
+      name: SITE_NAME,
+      url: SITE_URL,
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://периметр.рф/articles/${frontmatter.slug}/`,
+      '@id': `${SITE_URL}/articles/${frontmatter.slug}/`,
     },
     inLanguage: 'ru',
     ...(frontmatter.cover && {

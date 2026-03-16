@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: 'Инфографика | Периметр',
     description:
       'Визуальные материалы о психологии и ментальном здоровье — наглядные схемы, карточки и интерактивные элементы.',
-    images: [{ url: '/images/og/og-default.svg', width: 1200, height: 630, alt: 'Периметр — Инфографика' }],
+    images: [{ url: '/images/og/og-default.png', width: 1200, height: 630, alt: 'Периметр — Инфографика' }],
   },
 };
 

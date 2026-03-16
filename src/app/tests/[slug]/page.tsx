@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: `${test.title} | Периметр`,
       description: test.description,
-      images: [{ url: '/images/og/og-default.svg', width: 1200, height: 630, alt: test.title }],
+      images: [{ url: '/images/og/og-default.png', width: 1200, height: 630, alt: test.title }],
     },
   };
 }

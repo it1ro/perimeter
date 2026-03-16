@@ -3,13 +3,7 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
-const navLinks = [
-  { href: '/articles', label: 'Статьи' },
-  { href: '/tests', label: 'Тесты' },
-  { href: '/infographics', label: 'Инфографика' },
-  { href: '/about', label: 'О проекте' },
-];
+import { NAV_LINKS } from '@/lib/constants';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -76,7 +70,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         </div>
 
         <nav aria-label="Мобильная навигация" className="flex flex-col gap-1 p-4">
-          {navLinks.map((link) => (
+          {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}

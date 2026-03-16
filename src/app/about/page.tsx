@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: 'О проекте | Периметр',
     description:
       'Периметр — проект о психологии и ментальном здоровье. Узнайте о нашей миссии, целях и подходе.',
-    images: [{ url: '/images/og/og-default.svg', width: 1200, height: 630, alt: 'Периметр — О проекте' }],
+    images: [{ url: '/images/og/og-default.png', width: 1200, height: 630, alt: 'Периметр — О проекте' }],
   },
 };
 

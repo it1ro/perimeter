@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: 'Контакты | Периметр',
     description:
       'Свяжитесь с командой Периметра — задайте вопрос, предложите тему или поделитесь обратной связью.',
-    images: [{ url: '/images/og/og-default.svg', width: 1200, height: 630, alt: 'Периметр — Контакты' }],
+    images: [{ url: '/images/og/og-default.png', width: 1200, height: 630, alt: 'Периметр — Контакты' }],
   },
 };
 

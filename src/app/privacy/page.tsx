@@ -4,10 +4,21 @@ export const metadata: Metadata = {
   title: 'Политика конфиденциальности',
   description:
     'Политика конфиденциальности проекта Периметр — как мы обрабатываем ваши данные.',
+  alternates: {
+    canonical: '/privacy',
+  },
   openGraph: {
     title: 'Политика конфиденциальности | Периметр',
     description:
       'Политика конфиденциальности проекта Периметр — как мы обрабатываем ваши данные.',
+    images: [
+      {
+        url: '/images/og/og-default.png',
+        width: 1200,
+        height: 630,
+        alt: 'Периметр — психология ясно',
+      },
+    ],
   },
 };
 

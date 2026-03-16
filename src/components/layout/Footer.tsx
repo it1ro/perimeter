@@ -1,18 +1,15 @@
 import Link from 'next/link';
+import { NAV_LINKS } from '@/lib/constants';
 
 const footerLinks = [
   {
     title: 'Контент',
-    links: [
-      { href: '/articles', label: 'Статьи' },
-      { href: '/tests', label: 'Тесты' },
-      { href: '/infographics', label: 'Инфографика' },
-    ],
+    links: NAV_LINKS.filter((l) => l.href !== '/about'),
   },
   {
     title: 'Проект',
     links: [
-      { href: '/about', label: 'О проекте' },
+      ...NAV_LINKS.filter((l) => l.href === '/about'),
       { href: '/contacts', label: 'Контакты' },
       { href: '/privacy', label: 'Политика конфиденциальности' },
     ],

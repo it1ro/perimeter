@@ -4,13 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { MobileMenu } from './MobileMenu';
-
-const navLinks = [
-  { href: '/articles', label: 'Статьи' },
-  { href: '/tests', label: 'Тесты' },
-  { href: '/infographics', label: 'Инфографика' },
-  { href: '/about', label: 'О проекте' },
-];
+import { NAV_LINKS } from '@/lib/constants';
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -40,7 +34,7 @@ export function Header() {
 
         {/* Desktop nav */}
         <nav aria-label="Основная навигация" className="hidden items-center gap-1 md:flex">
-          {navLinks.map((link) => (
+          {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}

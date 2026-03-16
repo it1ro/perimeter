@@ -1,8 +1,9 @@
 import type { MetadataRoute } from 'next';
 import { getAllArticles } from '@/lib/articles';
 import { getAllTests } from '@/lib/tests';
+import { SITE_URL } from '@/lib/constants';
 
-const BASE_URL = 'https://xn--e1afmkfd.xn--p1ai';
+const BASE_URL = SITE_URL;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date().toISOString();
