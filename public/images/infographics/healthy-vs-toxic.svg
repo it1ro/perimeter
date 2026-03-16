@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#111820"/>
+  <rect x="40" y="40" width="720" height="520" rx="24" fill="#0B1014" stroke="#6B8DAE" stroke-opacity="0.3" stroke-width="2"/>
+  <text x="400" y="100" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="bold" fill="#E5E7EB">4>@>2K5 vs B>:A8G=K5 >B=>H5=8O</text>
+  <line x1="400" y1="130" x2="400" y2="520" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="6 4"/>
+  <text x="220" y="160" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="600" fill="#7C9A8E">4>@>2K5</text>
+  <text x="580" y="160" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="600" fill="#C4836A">">:A8G=K5</text>
+  <text x="220" y="210" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#E5E7EB">#2065=85 3@0=8F</text>
+  <text x="580" y="210" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#E5E7EB">3=>@8@>20=85 3@0=8F</text>
+  <text x="220" y="260" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#E5E7EB">B:@KB0O :><<C=8:0F8O</text>
+  <text x="580" y="260" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#E5E7EB">0=8?C;OF88 8 307;09B8=3</text>
+  <text x="220" y="310" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#E5E7EB">>445@6:0 8 4>25@85</text>
+  <text x="580" y="310" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#E5E7EB">>=B@>;L 8 @52=>ABL</text>
+  <text x="220" y="360" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#E5E7EB"> 02=>?@0285</text>
+  <text x="580" y="360" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#E5E7EB">><8=8@>20=85</text>
+  <text x="220" y="410" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#E5E7EB">8G=>5 ?@>AB@0=AB2></text>
+  <text x="580" y="410" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#E5E7EB">7>;OF8O >B 1;87:8E</text>
+  <text x="220" y="460" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#E5E7EB"> >AB 8 @0728B85</text>
+  <text x="580" y="460" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#E5E7EB"> 07@CH5=85 A0<>>F5=:8</text>
+  <text x="400" y="510" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#9CA3AF">A>7=0=85 @07=8FK  ?5@2K9 H03 : 74>@>2K< >B=>H5=8O<</text>
+</svg>
