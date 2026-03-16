@@ -3,44 +3,16 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { ArticleCard, type ArticleCardData } from './ArticleCard';
+import type { ArticleFrontmatter } from '@/types/article';
+import { ArticleCard } from './ArticleCard';
 
-const PLACEHOLDER_ARTICLES: ArticleCardData[] = [
-  {
-    slug: 'chto-takoe-trevozhnost',
-    title: 'Что такое тревожность и как отличить её от нормального беспокойства',
-    excerpt:
-      'Тревога — это нормальная реакция организма на стресс. Но когда она становится хронической, важно знать, что с этим делать.',
-    tag: 'Тревога',
-    readingTime: '5 мин',
-  },
-  {
-    slug: 'sindrom-emotsionalnogo-vygoraniya',
-    title: 'Синдром эмоционального выгорания: признаки и пути выхода',
-    excerpt:
-      'Выгорание — не слабость характера. Это физиологическая реакция на длительный стресс, и с ней можно и нужно работать.',
-    tag: 'Выгорание',
-    readingTime: '7 мин',
-  },
-  {
-    slug: 'lichnostnye-granicy',
-    title: 'Личные границы: как их установить и не чувствовать себя виноватым',
-    excerpt:
-      'Умение говорить «нет» — один из ключевых навыков психологического здоровья. Рассказываем, с чего начать.',
-    tag: 'Отношения',
-    readingTime: '6 мин',
-  },
-  {
-    slug: 'kak-uluchshit-son',
-    title: 'Как улучшить качество сна: что говорит наука',
-    excerpt:
-      'Сон напрямую влияет на эмоциональное состояние. Разбираем научно обоснованные способы наладить режим.',
-    tag: 'Здоровье',
-    readingTime: '4 мин',
-  },
-];
+interface LatestArticlesProps {
+  articles: ArticleFrontmatter[];
+}
 
-export function LatestArticles() {
+export function LatestArticles({ articles }: LatestArticlesProps) {
+  if (articles.length === 0) return null;
+
   return (
     <section className="px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
@@ -66,17 +38,16 @@ export function LatestArticles() {
           </Link>
         </motion.div>
 
-        {/* Horizontal scroll on mobile, 2×2 grid on desktop */}
         <motion.div
-          className="flex gap-4 overflow-x-auto pb-2 sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-4"
+          className="flex gap-4 overflow-x-auto pb-2 sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-3"
           style={{ scrollbarWidth: 'none' }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.15 }}
         >
-          {PLACEHOLDER_ARTICLES.map((article) => (
-            <ArticleCard key={article.slug} article={article} />
+          {articles.map((frontmatter) => (
+            <ArticleCard key={frontmatter.slug} frontmatter={frontmatter} />
           ))}
         </motion.div>
 

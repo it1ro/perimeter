@@ -3,6 +3,7 @@ import { Hero } from '@/components/home/Hero';
 import { Features } from '@/components/home/Features';
 import { LatestArticles } from '@/components/home/LatestArticles';
 import { TestCTA } from '@/components/home/TestCTA';
+import { getAllArticles } from '@/lib/articles';
 
 export const metadata: Metadata = {
   title: 'Периметр — психология ясно',
@@ -61,6 +62,10 @@ const jsonLd = {
 };
 
 export default function HomePage() {
+  const latestArticles = getAllArticles()
+    .slice(0, 4)
+    .map((a) => a.frontmatter);
+
   return (
     <>
       <script
@@ -69,7 +74,7 @@ export default function HomePage() {
       />
       <Hero />
       <Features />
-      <LatestArticles />
+      <LatestArticles articles={latestArticles} />
       <TestCTA />
     </>
   );
