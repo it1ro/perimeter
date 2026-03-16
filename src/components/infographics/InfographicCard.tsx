@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 import { X, ZoomIn } from 'lucide-react';
 import { m, AnimatePresence } from 'framer-motion';
 
@@ -56,12 +55,10 @@ export function InfographicCard({ src, alt, title, description }: InfographicCar
         className="group w-full rounded-2xl border border-white/10 bg-background-soft p-4 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-white/20 hover:shadow-lg hover:shadow-black/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/50"
       >
         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
-          <Image
+          <img
             src={src}
             alt={alt}
-            fill
-            unoptimized
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
           <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/30">
             <ZoomIn className="h-8 w-8 text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
@@ -106,13 +103,12 @@ export function InfographicCard({ src, alt, title, description }: InfographicCar
               >
                 <X className="h-5 w-5" />
               </button>
-              <Image
+              <img
                 src={src}
                 alt={alt}
-                width={1200}
-                height={900}
-                unoptimized
-                className="rounded-2xl"
+                width={800}
+                height={600}
+                className="max-h-[90vh] w-auto max-w-full rounded-2xl object-contain"
               />
             </m.div>
           </m.div>
