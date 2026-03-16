@@ -1,14 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 
 export function TestCTA() {
   return (
     <section className="px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
-        <motion.div
+        <m.div
           className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-sage/20 via-background-soft to-blue/15 p-8 sm:p-12"
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -48,7 +48,7 @@ export function TestCTA() {
               </Link>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

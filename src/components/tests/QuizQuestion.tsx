@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import type { QuizQuestion as QuizQuestionType } from '@/types/test';
 
 interface QuizQuestionProps {
@@ -29,7 +29,7 @@ export function QuizQuestion({ question, onAnswer }: QuizQuestionProps) {
           const isSelected = selectedId === option.id;
 
           return (
-            <motion.button
+            <m.button
               key={option.id}
               type="button"
               role="radio"
@@ -48,7 +48,7 @@ export function QuizQuestion({ question, onAnswer }: QuizQuestionProps) {
               whileTap={!selectedId ? { scale: 0.98 } : undefined}
             >
               {option.text}
-            </motion.button>
+            </m.button>
           );
         })}
       </div>

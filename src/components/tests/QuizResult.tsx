@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { CopyButton } from '@/components/ui/CopyButton';
@@ -25,7 +25,7 @@ export function QuizResult({
   const copyText = `${quizTitle}\n\nМой результат: ${title} (${score} из ${maxScore})\n\n${description}`;
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -58,6 +58,6 @@ export function QuizResult({
           Пройти заново
         </Button>
       </div>
-    </motion.div>
+    </m.div>
   );
 }

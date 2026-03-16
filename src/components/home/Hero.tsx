@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 function fadeUp(delay = 0) {
   return {
@@ -15,14 +15,14 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
       {/* Decorative blobs */}
-      <motion.div
+      <m.div
         aria-hidden
         className="pointer-events-none absolute -top-32 left-1/2 h-[480px] w-[680px] -translate-x-1/2 rounded-full bg-sage/10 blur-3xl"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2, ease: 'easeOut' }}
       />
-      <motion.div
+      <m.div
         aria-hidden
         className="pointer-events-none absolute -bottom-24 right-0 h-[320px] w-[420px] rounded-full bg-blue/10 blur-3xl"
         initial={{ opacity: 0, scale: 0.8 }}
@@ -31,14 +31,14 @@ export function Hero() {
       />
 
       <div className="relative mx-auto max-w-3xl text-center">
-        <motion.span
+        <m.span
           className="mb-6 inline-block rounded-full border border-sage/30 bg-sage/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-sage"
           {...fadeUp(0)}
         >
           Психология без жаргона
-        </motion.span>
+        </m.span>
 
-        <motion.h1
+        <m.h1
           className="font-display mb-6 text-4xl font-bold leading-tight tracking-tight text-text sm:text-5xl lg:text-6xl"
           {...fadeUp(0.1)}
         >
@@ -54,16 +54,16 @@ export function Hero() {
             </svg>
             <span className="relative">проще</span>
           </span>
-        </motion.h1>
+        </m.h1>
 
-        <motion.p
+        <m.p
           className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-text-muted"
           {...fadeUp(0.2)}
         >
           Статьи, тесты и инфографика о ментальном здоровье — понятно, честно и без лишней воды.
-        </motion.p>
+        </m.p>
 
-        <motion.div
+        <m.div
           className="flex flex-col items-center justify-center gap-4 sm:flex-row"
           {...fadeUp(0.3)}
         >
@@ -79,7 +79,7 @@ export function Hero() {
           >
             Пройти тест
           </Link>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

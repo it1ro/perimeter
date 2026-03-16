@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useMemo, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import type { Quiz } from '@/types/test';
 import { QuizQuestion } from './QuizQuestion';
 import { QuizResult } from './QuizResult';
@@ -84,7 +84,7 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
           aria-valuemin={0}
           aria-valuemax={100}
         >
-          <motion.div
+          <m.div
             className="h-full rounded-full bg-sage"
             initial={false}
             animate={{ width: `${progressPercent}%` }}
@@ -97,7 +97,7 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
       <div className="relative min-h-[320px]">
         <AnimatePresence mode="wait" custom={direction}>
           {stage === 'questions' ? (
-            <motion.div
+            <m.div
               key={`question-${currentIndex}`}
               custom={direction}
               variants={slideVariants}
@@ -110,10 +110,10 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
                 question={quiz.questions[currentIndex]}
                 onAnswer={handleAnswer}
               />
-            </motion.div>
+            </m.div>
           ) : (
             result && (
-              <motion.div
+              <m.div
                 key="result"
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -127,7 +127,7 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
                   quizTitle={quiz.title}
                   onRestart={handleRestart}
                 />
-              </motion.div>
+              </m.div>
             )
           )}
         </AnimatePresence>
