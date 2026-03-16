@@ -24,8 +24,17 @@ export function Header() {
         {/* Logo */}
         <Link
           href="/"
-          className="text-xl font-bold tracking-tight text-text transition-colors hover:text-sage"
+          className="group relative inline-block px-2 pb-1 pt-4 text-xl font-bold tracking-tight text-text transition-colors hover:text-sage"
         >
+          {/* Corner brackets — perimeter frame */}
+          <span className="absolute -left-1.5 -top-1.5 h-3 w-3 border-l border-t border-sage/25 transition-colors group-hover:border-sage/50" />
+          <span className="absolute -right-1.5 -top-1.5 h-3 w-3 border-r border-t border-sage/25 transition-colors group-hover:border-sage/50" />
+          <span className="absolute -bottom-1.5 -left-1.5 h-3 w-3 border-b border-l border-sage/25 transition-colors group-hover:border-sage/50" />
+          <span className="absolute -bottom-1.5 -right-1.5 h-3 w-3 border-b border-r border-sage/25 transition-colors group-hover:border-sage/50" />
+
+          <span className="absolute left-2 top-1 text-[10px] font-semibold tracking-wider text-sage">
+            Мой
+          </span>
           Периметр
         </Link>
 
