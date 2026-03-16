@@ -21,7 +21,7 @@
 - [x] ✅ Выполнено — Настроить Tailwind CSS: кастомная палитра (шалфей `#7C9A8E`, синий `#6B8DAE`, терракот `#C4836A`, фоны, текст), брейкпоинты mobile-first
 - [x] ✅ Выполнено — Подключить шрифты Manrope и Inter через `next/font/google`
 - [x] ✅ Выполнено — Настроить `globals.css` с Tailwind directives и базовыми кастомными стилями
-- [x] ✅ Выполнено — Настроить ESLint (`eslint-config-next`) и Prettier (`prettier-plugin-tailwindcss`)
+- [x] ✅ Выполнено — Настроить ESLint (`eslint-config-next`) в `.eslintrc.cjs` и Prettier (`prettier-plugin-tailwindcss`) в `prettier.config.cjs` (CJS-формат обязателен при `"type": "module"` в `package.json`)
 - [x] ✅ Выполнено — Настроить `tsconfig.json` (strict mode, path aliases `@/`)
 
 ### Структура проекта

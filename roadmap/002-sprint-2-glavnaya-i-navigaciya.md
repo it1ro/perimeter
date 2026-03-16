@@ -46,9 +46,9 @@
 
 ### SEO главной страницы
 
-- [x] ✅ Выполнено — Настроить `generateMetadata` в `src/app/page.tsx`: title, description, Open Graph теги, Twitter Card
+- [x] ✅ Выполнено — Настроить статический `export const metadata` в `src/app/page.tsx`: title, description, Open Graph теги, Twitter Card (статический экспорт подходит для `output: 'export'`)
 - [x] ✅ Выполнено — Добавить JSON-LD микроразметку (тип `WebSite`) для главной страницы
-- [x] ✅ Выполнено — Подготовить OG-изображение (заглушку SVG) в `public/images/og/`
+- [x] ✅ Выполнено — Подготовить OG-изображение в `public/images/og/`: SVG-исходник + конвертированный `og-default.png` (PNG обязателен — SVG не поддерживается соцсетями для Open Graph)
 
 ### Сборка главной
 
@@ -67,7 +67,7 @@
 - `LatestArticles.tsx` — горизонтальный скролл на мобильных, сетка 2×2 на планшете, 4 колонки на десктопе; плейсхолдер-статьи; ссылка «Все статьи →»
 - `TestCTA.tsx` — акцентный блок-призыв с градиентным фоном, иконкой Sparkles и кнопкой-ссылкой
 - `Header.tsx` — активный пункт меню подсвечивается через `usePathname`; аналогично в `MobileMenu.tsx`
-- `src/app/page.tsx` — полный SEO (`title`, `description`, `openGraph`, `twitter`), JSON-LD `WebSite`, все 4 секции
-- `public/images/og/og-default.svg` — SVG-заглушка для Open Graph
+- `src/app/page.tsx` — полный SEO через статический `export const metadata` (`title`, `description`, `openGraph`, `twitter`), JSON-LD `WebSite`, все 4 секции
+- `public/images/og/og-default.svg` — SVG-исходник; `og-default.png` — конвертированный PNG для Open Graph (1200×630, используется в метаданных)
 - `globals.css` — добавлен `prefers-reduced-motion: reduce` для доступности
 - `next build` проходит без ошибок; статический экспорт в `out/` корректен
