@@ -1,24 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
   <rect width="800" height="600" fill="#111820"/>
   <rect x="40" y="40" width="720" height="520" rx="24" fill="#0B1014" stroke="#C4836A" stroke-opacity="0.3" stroke-width="2"/>
-  <text x="400" y="100" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="bold" fill="#E5E7EB">@87=0:8 2K3>@0=8O</text>
+  <text x="400" y="100" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="bold" fill="#E5E7EB">@87=0:8 2K3&gt;@0=8O</text>
   <rect x="80" y="140" width="290" height="70" rx="12" fill="#C4836A" fill-opacity="0.1" stroke="#C4836A" stroke-opacity="0.25"/>
-  <text x="225" y="170" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#C4836A">-<>F8>=0;L=>5 8AB>I5=85</text>
-  <text x="225" y="192" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">>AB>O==0O CAB0;>ABL, 0?0B8O</text>
+  <text x="225" y="170" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#C4836A">-&lt;&gt;F8&gt;=0;L=&gt;5 8AB&gt;I5=85</text>
+  <text x="225" y="192" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">&gt;AB&gt;O==0O CAB0;&gt;ABL, 0?0B8O</text>
   <rect x="430" y="140" width="290" height="70" rx="12" fill="#C4836A" fill-opacity="0.1" stroke="#C4836A" stroke-opacity="0.25"/>
-  <text x="575" y="170" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#C4836A">5?5@A>=0;870F8O</text>
-  <text x="575" y="192" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">&8=87<, >BAB@0=Q==>ABL</text>
+  <text x="575" y="170" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#C4836A">5?5@A&gt;=0;870F8O</text>
+  <text x="575" y="192" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">&amp;amp;8=87&amp;lt;, &amp;gt;BAB@0=Q==&amp;gt;ABL</text>
   <rect x="80" y="240" width="290" height="70" rx="12" fill="#C4836A" fill-opacity="0.1" stroke="#C4836A" stroke-opacity="0.25"/>
-  <text x="225" y="270" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#C4836A">!=865=85 ?@>4C:B82=>AB8</text>
-  <text x="225" y="292" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">"@C4=> :>=F5=B@8@>20BLAO</text>
+  <text x="225" y="270" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#C4836A">!=865=85 ?@&gt;4C:B82=&gt;AB8</text>
+  <text x="225" y="292" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">"@C4=&gt; :&gt;=F5=B@8@&gt;20BLAO</text>
   <rect x="430" y="240" width="290" height="70" rx="12" fill="#C4836A" fill-opacity="0.1" stroke="#C4836A" stroke-opacity="0.25"/>
-  <text x="575" y="270" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#C4836A">$878G5A:85 A8<?B><K</text>
-  <text x="575" y="292" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">>;>2=K5 1>;8, 15AA>==8F0</text>
+  <text x="575" y="270" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#C4836A">$878G5A:85 A8&lt;?B&gt;&lt;K</text>
+  <text x="575" y="292" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">&gt;;&gt;2=K5 1&gt;;8, 15AA&gt;==8F0</text>
   <rect x="80" y="340" width="290" height="70" rx="12" fill="#7C9A8E" fill-opacity="0.1" stroke="#7C9A8E" stroke-opacity="0.25"/>
-  <text x="225" y="370" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#7C9A8E">'B> 45;0BL?</text>
-  <text x="225" y="392" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">>AAB0=>28BL 3@0=8FK 8 >B4KE</text>
+  <text x="225" y="370" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#7C9A8E">'B&gt; 45;0BL?</text>
+  <text x="225" y="392" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">&gt;AAB0=&gt;28BL 3@0=8FK 8 &gt;B4KE</text>
   <rect x="430" y="340" width="290" height="70" rx="12" fill="#7C9A8E" fill-opacity="0.1" stroke="#7C9A8E" stroke-opacity="0.25"/>
-  <text x="575" y="370" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#7C9A8E"> :><C >1@0B8BLAO?</text>
-  <text x="575" y="392" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">A8E>;>3, B5@0?52B</text>
-  <text x="400" y="480" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#9CA3AF">K3>@0=85  =5 ;5=L. -B> A83=0;, GB> ?>@0 ?>701>B8BLAO > A515.</text>
+  <text x="575" y="370" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#7C9A8E"> :&gt;&lt;C &gt;1@0B8BLAO?</text>
+  <text x="575" y="392" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">A8E&gt;;&gt;3, B5@0?52B</text>
+  <text x="400" y="480" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#9CA3AF">K3&gt;@0=85  =5 ;5=L. -B&gt; A83=0;, GB&gt; ?&gt;@0 ?&gt;701&gt;B8BLAO &gt; A515.</text>
 </svg>
