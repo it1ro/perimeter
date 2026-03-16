@@ -1,35 +1,35 @@
 import type { Metadata } from 'next';
 import { getAllArticles, getAllTags } from '@/lib/articles';
-import { ArticlesGrid } from '@/components/articles/ArticlesGrid';
+import { TagFilter } from '@/components/articles/TagFilter';
 
 export const metadata: Metadata = {
   title: 'Статьи',
   description:
-    'Статьи о психологии, личных границах и ментальном здоровье — понятно, честно и без воды.',
+    'Материалы о психологии, ментальном здоровье, отношениях и саморазвитии — понятно, честно, без воды.',
   openGraph: {
     title: 'Статьи | Периметр',
     description:
-      'Статьи о психологии, личных границах и ментальном здоровье — понятно, честно и без воды.',
+      'Материалы о психологии, ментальном здоровье, отношениях и саморазвитии.',
   },
 };
 
 export default function ArticlesPage() {
-  const articles = getAllArticles();
-  const tags = getAllTags();
+  const articles = getAllArticles().map((a) => a.frontmatter);
+  const allTags = getAllTags();
 
   return (
     <section className="px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
-        <div className="mb-10">
-          <h1 className="font-display mb-2 text-3xl font-bold text-text sm:text-4xl">
+        <header className="mb-10">
+          <h1 className="font-display mb-2 text-4xl font-bold text-text sm:text-5xl">
             Статьи
           </h1>
           <p className="text-base text-text-muted">
-            Разбираемся в психологии — понятно, честно и без воды
+            Материалы о психологии и ментальном здоровье — понятно и без воды
           </p>
-        </div>
+        </header>
 
-        <ArticlesGrid articles={articles} tags={tags} />
+        <TagFilter articles={articles} allTags={allTags} />
       </div>
     </section>
   );

@@ -1,61 +1,52 @@
 'use client';
 
-import { useState, useCallback } from 'react';
-import type { Article } from '@/types/article';
+import { useState } from 'react';
+import { Tag } from '@/components/ui/Tag';
+import type { ArticleFrontmatter } from '@/types/article';
+import { ArticleCard } from './ArticleCard';
 
 interface TagFilterProps {
-  tags: string[];
-  articles: Article[];
-  children: (filtered: Article[]) => React.ReactNode;
+  articles: ArticleFrontmatter[];
+  allTags: string[];
 }
 
-export function TagFilter({ tags, articles, children }: TagFilterProps) {
+export function TagFilter({ articles, allTags }: TagFilterProps) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
 
-  const toggle = useCallback((tag: string) => {
-    setActiveTag((prev) => (prev === tag ? null : tag));
-  }, []);
-
   const filtered = activeTag
-    ? articles.filter((a) => a.frontmatter.tags.includes(activeTag))
+    ? articles.filter((a) => a.tags.includes(activeTag))
     : articles;
 
   return (
-    <>
-      <div className="-mx-4 mb-8 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
-        <button
-          type="button"
+    <div>
+      <div
+        className="mb-8 flex gap-2 overflow-x-auto pb-1"
+        style={{ scrollbarWidth: 'none' }}
+      >
+        <Tag
+          label="Все"
+          active={activeTag === null}
           onClick={() => setActiveTag(null)}
-          aria-pressed={activeTag === null}
-          className={[
-            'inline-flex shrink-0 items-center rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors duration-150',
-            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/50',
-            activeTag === null
-              ? 'bg-sage/20 text-sage ring-1 ring-sage/40'
-              : 'bg-white/10 text-text-muted hover:bg-white/20 hover:text-text',
-          ].join(' ')}
-        >
-          Все
-        </button>
-        {tags.map((tag) => (
-          <button
+        />
+        {allTags.map((tag) => (
+          <Tag
             key={tag}
-            type="button"
-            onClick={() => toggle(tag)}
-            aria-pressed={activeTag === tag}
-            className={[
-              'inline-flex shrink-0 items-center rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors duration-150',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/50',
-              activeTag === tag
-                ? 'bg-sage/20 text-sage ring-1 ring-sage/40'
-                : 'bg-white/10 text-text-muted hover:bg-white/20 hover:text-text',
-            ].join(' ')}
-          >
-            {tag}
-          </button>
+            label={tag}
+            active={activeTag === tag}
+            onClick={() => setActiveTag(tag === activeTag ? null : tag)}
+          />
         ))}
       </div>
-      {children(filtered)}
-    </>
+
+      {filtered.length === 0 ? (
+        <p className="py-16 text-center text-text-muted">По этому тегу статей пока нет.</p>
+      ) : (
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((article) => (
+            <ArticleCard key={article.slug} frontmatter={article} />
+          ))}
+        </div>
+      )}
+    </div>
   );
 }

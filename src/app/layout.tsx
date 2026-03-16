@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://xn--e1afmkfd.xn--p1ai'),
   title: {
     default: 'Периметр — психология ясно',
     template: '%s | Периметр',

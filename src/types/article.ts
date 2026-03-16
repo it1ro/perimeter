@@ -5,6 +5,7 @@ export interface ArticleFrontmatter {
   description: string;
   tags: string[];
   cover?: string;
+  readingTime?: string;
 }
 
 export interface Article {

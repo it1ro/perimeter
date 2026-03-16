@@ -1,7 +1,8 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, Calendar } from 'lucide-react';
+import Link from 'next/link';
+import Image from 'next/image';
+import type { Metadata } from 'next';
+import { ArrowLeft } from 'lucide-react';
 import { getAllArticles, getArticleBySlug } from '@/lib/articles';
 import { ArticleContent } from '@/components/articles/ArticleContent';
 
@@ -9,32 +10,34 @@ interface PageProps {
   params: { slug: string };
 }
 
-export function generateStaticParams() {
-  return getAllArticles().map((a) => ({ slug: a.frontmatter.slug }));
+export async function generateStaticParams() {
+  const articles = getAllArticles();
+  return articles.map((a) => ({ slug: a.frontmatter.slug }));
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const article = getArticleBySlug(params.slug);
   if (!article) return {};
 
-  const { title, description, cover } = article.frontmatter;
-
+  const { frontmatter } = article;
   return {
-    title,
-    description,
+    title: frontmatter.title,
+    description: frontmatter.description,
     openGraph: {
-      title: `${title} | Периметр`,
-      description,
+      title: frontmatter.title,
+      description: frontmatter.description,
       type: 'article',
-      ...(cover && {
-        images: [{ url: cover, width: 1200, height: 630, alt: title }],
+      publishedTime: frontmatter.date,
+      tags: frontmatter.tags,
+      ...(frontmatter.cover && {
+        images: [{ url: frontmatter.cover, width: 1200, height: 630, alt: frontmatter.title }],
       }),
     },
     twitter: {
       card: 'summary_large_image',
-      title,
-      description,
-      ...(cover && { images: [cover] }),
+      title: frontmatter.title,
+      description: frontmatter.description,
+      ...(frontmatter.cover && { images: [frontmatter.cover] }),
     },
   };
 }
@@ -51,14 +54,14 @@ export default function ArticlePage({ params }: PageProps) {
   const article = getArticleBySlug(params.slug);
   if (!article) notFound();
 
-  const { title, date, tags, cover } = article.frontmatter;
+  const { frontmatter, content } = article;
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: title,
-    description: article.frontmatter.description,
-    datePublished: date,
+    headline: frontmatter.title,
+    description: frontmatter.description,
+    datePublished: frontmatter.date,
     author: {
       '@type': 'Organization',
       name: 'Периметр',
@@ -67,11 +70,11 @@ export default function ArticlePage({ params }: PageProps) {
       '@type': 'Organization',
       name: 'Периметр',
     },
-    ...(cover && {
-      image: cover,
-    }),
-    keywords: tags.join(', '),
     inLanguage: 'ru',
+    ...(frontmatter.cover && {
+      image: frontmatter.cover,
+    }),
+    keywords: frontmatter.tags.join(', '),
   };
 
   return (
@@ -81,50 +84,73 @@ export default function ArticlePage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <article className="px-4 py-12 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl">
-          <Link
-            href="/articles"
-            className="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-text-muted transition-colors hover:text-sage"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Назад к статьям
-          </Link>
+      <article className="px-4 py-16 sm:px-8">
+        <div className="mx-auto max-w-2xl">
+          <nav className="mb-8">
+            <Link
+              href="/articles"
+              className="inline-flex items-center gap-1.5 text-sm text-text-muted transition-colors hover:text-sage"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Все статьи
+            </Link>
+          </nav>
 
           <header className="mb-10">
-            {cover && (
-              <div className="mb-6 overflow-hidden rounded-2xl">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={cover}
-                  alt={title}
-                  className="aspect-[2/1] w-full object-cover"
-                />
-              </div>
-            )}
-
-            <div className="mb-4 flex flex-wrap items-center gap-2">
-              {tags.map((tag) => (
+            <div className="mb-4 flex flex-wrap gap-2">
+              {frontmatter.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full bg-sage/15 px-2.5 py-0.5 text-xs font-medium text-sage"
+                  className="rounded-full bg-sage/15 px-3 py-1 text-xs font-medium text-sage"
                 >
                   {tag}
                 </span>
               ))}
             </div>
 
-            <h1 className="font-display mb-3 text-3xl font-bold leading-tight text-text sm:text-4xl lg:text-[2.5rem]">
-              {title}
+            <h1 className="font-display mb-4 text-3xl font-bold leading-tight text-text sm:text-4xl">
+              {frontmatter.title}
             </h1>
 
-            <div className="flex items-center gap-1.5 text-sm text-text-muted">
-              <Calendar className="h-4 w-4" />
-              <time dateTime={date}>{formatDate(date)}</time>
+            <p className="mb-4 text-base leading-relaxed text-text-muted">
+              {frontmatter.description}
+            </p>
+
+            <div className="flex items-center gap-3 text-sm text-text-muted">
+              <time dateTime={frontmatter.date}>{formatDate(frontmatter.date)}</time>
+              {frontmatter.readingTime && (
+                <>
+                  <span className="text-white/20">&middot;</span>
+                  <span>{frontmatter.readingTime} чтения</span>
+                </>
+              )}
             </div>
           </header>
 
-          <ArticleContent content={article.content} />
+          {frontmatter.cover && (
+            <div className="relative mb-10 h-64 w-full overflow-hidden rounded-2xl sm:h-80">
+              <Image
+                src={frontmatter.cover}
+                alt={frontmatter.title}
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 640px) 100vw, 672px"
+              />
+            </div>
+          )}
+
+          <ArticleContent content={content} />
+
+          <footer className="mt-12 border-t border-white/10 pt-8">
+            <Link
+              href="/articles"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-sage transition-colors hover:text-sage/80"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Вернуться к статьям
+            </Link>
+          </footer>
         </div>
       </article>
     </>
