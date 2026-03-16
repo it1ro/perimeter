@@ -26,7 +26,7 @@ export const metadata: Metadata = {
       'Статьи, тесты и инфографика о ментальном здоровье — понятно, честно и без лишней воды.',
     images: [
       {
-        url: '/images/og/og-default.svg',
+        url: '/images/og/og-default.png',
         width: 1200,
         height: 630,
         alt: 'Периметр — психология ясно',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: 'Периметр — психология ясно',
     description:
       'Статьи, тесты и инфографика о ментальном здоровье — понятно, честно и без лишней воды.',
-    images: ['/images/og/og-default.svg'],
+    images: ['/images/og/og-default.png'],
   },
 };
 
