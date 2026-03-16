@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     title: 'Статьи | Периметр',
     description:
       'Материалы о психологии, ментальном здоровье, отношениях и саморазвитии.',
+    images: [{ url: '/images/og/og-default.svg', width: 1200, height: 630, alt: 'Периметр — Статьи' }],
   },
 };
 

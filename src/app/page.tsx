@@ -20,14 +20,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ru_RU',
-    url: 'https://periметр.рф',
+    url: '/',
     siteName: 'Периметр',
     title: 'Периметр — психология ясно',
     description:
       'Статьи, тесты и инфографика о ментальном здоровье — понятно, честно и без лишней воды.',
     images: [
       {
-        url: '/images/og/og-default.png',
+        url: '/images/og/og-default.svg',
         width: 1200,
         height: 630,
         alt: 'Периметр — психология ясно',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     title: 'Периметр — психология ясно',
     description:
       'Статьи, тесты и инфографика о ментальном здоровье — понятно, честно и без лишней воды.',
-    images: ['/images/og/og-default.png'],
+    images: ['/images/og/og-default.svg'],
   },
 };
 
@@ -49,15 +49,12 @@ const jsonLd = {
   name: 'Периметр',
   description:
     'Сайт о психологии и ментальном здоровье. Статьи, тесты, инфографика — понятно и без воды.',
-  url: 'https://periметр.рф',
+  url: 'https://периметр.рф',
   inLanguage: 'ru',
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: 'https://periметр.рф/articles?q={search_term_string}',
-    },
-    'query-input': 'required name=search_term_string',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Периметр',
+    url: 'https://периметр.рф',
   },
 };
 

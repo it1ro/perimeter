@@ -62,13 +62,20 @@ export default function ArticlePage({ params }: PageProps) {
     headline: frontmatter.title,
     description: frontmatter.description,
     datePublished: frontmatter.date,
+    url: `https://периметр.рф/articles/${frontmatter.slug}/`,
     author: {
       '@type': 'Organization',
       name: 'Периметр',
+      url: 'https://периметр.рф',
     },
     publisher: {
       '@type': 'Organization',
       name: 'Периметр',
+      url: 'https://периметр.рф',
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://периметр.рф/articles/${frontmatter.slug}/`,
     },
     inLanguage: 'ru',
     ...(frontmatter.cover && {
