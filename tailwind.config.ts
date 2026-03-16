@@ -21,6 +21,10 @@ const config: Config = {
           muted: '#9CA3AF',
         },
       },
+      fontFamily: {
+        sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['var(--font-manrope)', 'var(--font-inter)', 'ui-sans-serif', 'sans-serif'],
+      },
       screens: {
         xs: '375px',
         sm: '640px',
