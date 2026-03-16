@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const navLinks = [
   { href: '/articles', label: 'Статьи' },
@@ -16,6 +17,9 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+  const pathname = usePathname();
+  const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -77,7 +81,12 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               key={link.href}
               href={link.href}
               onClick={onClose}
-              className="rounded-lg px-4 py-3 text-base font-medium text-text transition-colors hover:bg-white/10 hover:text-sage"
+              className={[
+                'rounded-lg px-4 py-3 text-base font-medium transition-colors',
+                isActive(link.href)
+                  ? 'bg-sage/15 text-sage'
+                  : 'text-text hover:bg-white/10 hover:text-sage',
+              ].join(' ')}
             >
               {link.label}
             </Link>
