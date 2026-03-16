@@ -75,7 +75,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           </button>
         </div>
 
-        <nav className="flex flex-col gap-1 p-4">
+        <nav aria-label="Мобильная навигация" className="flex flex-col gap-1 p-4">
           {navLinks.map((link) => (
             <Link
               key={link.href}

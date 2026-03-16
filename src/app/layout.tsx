@@ -3,6 +3,9 @@ import { inter, manrope } from './fonts';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { ToastContainer } from '@/components/ui/Toast';
+import { MotionProvider } from '@/components/providers/MotionProvider';
+import { YandexMetrika } from '@/components/analytics/YandexMetrika';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://xn--e1afmkfd.xn--p1ai'),
@@ -29,9 +32,19 @@ export default function RootLayout({
   return (
     <html lang="ru" className={`${inter.variable} ${manrope.variable}`}>
       <body className="flex min-h-screen flex-col font-sans">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <a
+          href="#main-content"
+          className="fixed left-2 top-2 z-[100] -translate-y-20 rounded-lg bg-sage px-4 py-2 text-sm font-medium text-white transition-transform focus:translate-y-0"
+        >
+          Перейти к содержимому
+        </a>
+        <MotionProvider>
+          <Header />
+          <main id="main-content" className="flex-1">{children}</main>
+          <Footer />
+        </MotionProvider>
+        <ToastContainer />
+        <YandexMetrika />
       </body>
     </html>
   );

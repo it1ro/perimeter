@@ -13,6 +13,7 @@ const footerLinks = [
     title: 'Проект',
     links: [
       { href: '/about', label: 'О проекте' },
+      { href: '/contacts', label: 'Контакты' },
       { href: '/privacy', label: 'Политика конфиденциальности' },
     ],
   },
@@ -22,7 +23,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/10 bg-background-soft">
+    <footer className="border-t border-white/10 bg-background-soft" role="contentinfo">
       <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-3">
           {/* Brand */}
