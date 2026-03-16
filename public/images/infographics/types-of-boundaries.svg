@@ -1,16 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
   <rect width="800" height="600" fill="#111820"/>
   <rect x="40" y="40" width="720" height="520" rx="24" fill="#0B1014" stroke="#7C9A8E" stroke-opacity="0.3" stroke-width="2"/>
-  <text x="400" y="100" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="bold" fill="#E5E7EB">"8?K ;8G=KE 3@0=8F</text>
+  <text x="400" y="100" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="bold" fill="#E5E7EB">Типы личных границ</text>
   <circle cx="200" cy="280" r="80" fill="#7C9A8E" fill-opacity="0.15" stroke="#7C9A8E" stroke-opacity="0.4" stroke-width="2"/>
-  <text x="200" y="275" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#7C9A8E">$878G5A:85</text>
-  <text x="200" y="295" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">"5;&gt;, ?@&gt;AB@0=AB2&gt;</text>
+  <text x="200" y="275" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#7C9A8E">Физические</text>
+  <text x="200" y="295" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">Тело, пространство</text>
   <circle cx="400" cy="280" r="80" fill="#6B8DAE" fill-opacity="0.15" stroke="#6B8DAE" stroke-opacity="0.4" stroke-width="2"/>
-  <text x="400" y="275" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#6B8DAE">-&lt;&gt;F8&gt;=0;L=K5</text>
-  <text x="400" y="295" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">'C2AB20, M=5@38O</text>
+  <text x="400" y="275" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#6B8DAE">Эмоциональные</text>
+  <text x="400" y="295" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">Чувства, границы</text>
   <circle cx="600" cy="280" r="80" fill="#C4836A" fill-opacity="0.15" stroke="#C4836A" stroke-opacity="0.4" stroke-width="2"/>
-  <text x="600" y="275" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#C4836A">=B5;;5:BC0;L=K5</text>
-  <text x="600" y="295" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">KA;8, C15645=8O</text>
-  <text x="400" y="460" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#9CA3AF">064K9 B8? 3@0=8F 70I8I05B @07=K5 0A?5:BK 20H59 ;8G=&gt;AB8</text>
-  <text x="400" y="485" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#9CA3AF">8 ?&gt;&lt;&gt;305B AB@&gt;8BL 74&gt;@&gt;2K5 &gt;B=&gt;H5=8O A A&gt;1&gt;9 8 4@C38&lt;8</text>
+  <text x="600" y="275" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#C4836A">Интеллектуальные</text>
+  <text x="600" y="295" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">Мысли, убеждения</text>
+  <text x="400" y="460" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#9CA3AF">Оба типа границ помогают сохранять баланс и уважение к себе</text>
+  <text x="400" y="485" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#9CA3AF">и в практике осознанности, и в отношениях с людьми</text>
 </svg>
