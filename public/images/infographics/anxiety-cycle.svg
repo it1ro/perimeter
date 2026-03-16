@@ -1,19 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
   <rect width="800" height="600" fill="#111820"/>
   <rect x="40" y="40" width="720" height="520" rx="24" fill="#0B1014" stroke="#6B8DAE" stroke-opacity="0.3" stroke-width="2"/>
-  <text x="400" y="95" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="bold" fill="#E5E7EB">&amp;amp;8:; B@52&amp;gt;6=&amp;gt;AB8</text>
+  <text x="400" y="95" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="bold" fill="#E5E7EB">Цикл тревожности</text>
   <circle cx="400" cy="320" r="160" fill="none" stroke="#6B8DAE" stroke-opacity="0.2" stroke-width="2" stroke-dasharray="8 4"/>
   <rect x="340" y="140" width="120" height="50" rx="12" fill="#6B8DAE" fill-opacity="0.15" stroke="#6B8DAE" stroke-opacity="0.4"/>
-  <text x="400" y="170" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#6B8DAE">"@8335@</text>
+  <text x="400" y="170" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#6B8DAE">Триггер</text>
   <rect x="520" y="245" width="140" height="50" rx="12" fill="#C4836A" fill-opacity="0.15" stroke="#C4836A" stroke-opacity="0.4"/>
-  <text x="590" y="275" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#C4836A">"@52&gt;6=K5 &lt;KA;8</text>
+  <text x="590" y="275" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#C4836A">Тревожные мысли</text>
   <rect x="500" y="380" width="150" height="50" rx="12" fill="#C4836A" fill-opacity="0.15" stroke="#C4836A" stroke-opacity="0.4"/>
-  <text x="575" y="410" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#C4836A">$87. A8&lt;?B&gt;&lt;K</text>
+  <text x="575" y="410" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#C4836A">Тело. Реакция</text>
   <rect x="310" y="440" width="180" height="50" rx="12" fill="#C4836A" fill-opacity="0.15" stroke="#C4836A" stroke-opacity="0.4"/>
-  <text x="400" y="470" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#C4836A">71530NI55 ?&gt;2545=85</text>
+  <text x="400" y="470" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#C4836A">Избегание повторяется</text>
   <rect x="140" y="380" width="170" height="50" rx="12" fill="#C4836A" fill-opacity="0.15" stroke="#C4836A" stroke-opacity="0.4"/>
-  <text x="225" y="410" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#C4836A">@5&lt;5==&gt;5 &gt;1;53G5=85</text>
+  <text x="225" y="410" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#C4836A">Делаете — выгорание</text>
   <rect x="140" y="245" width="150" height="50" rx="12" fill="#7C9A8E" fill-opacity="0.15" stroke="#7C9A8E" stroke-opacity="0.4"/>
-  <text x="215" y="275" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#7C9A8E">#A8;5=85 B@52&gt;38</text>
-  <text x="400" y="540" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#9CA3AF"> 07&gt;@20BL F8:; ?&gt;&lt;&gt;305B &gt;A&gt;7=0==&gt;ABL 8 @01&gt;B0 A B5@0?52B&gt;&lt;</text>
+  <text x="215" y="275" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#7C9A8E">Возврат к тревоге</text>
+  <text x="400" y="540" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#9CA3AF">Чтобы разорвать цикл — осознание, практики и поддержка в терапии</text>
 </svg>
