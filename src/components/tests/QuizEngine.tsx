@@ -237,8 +237,10 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
               {quiz.instructions && (
                 <p className="text-sm leading-relaxed text-text-muted">{quiz.instructions}</p>
               )}
-              {quiz.disclaimer && (
-                <p className="mt-3 text-xs leading-relaxed text-text-muted">{quiz.disclaimer}</p>
+              {quiz.ux?.disclaimers.intro && (
+                <p className="mt-3 text-xs leading-relaxed text-text-muted">
+                  {quiz.ux.disclaimers.intro}
+                </p>
               )}
               <button
                 type="button"
@@ -263,7 +265,7 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
                 selectedOptionId={selectedOptionId}
                 onSelectOption={handleSelectAnswer}
                 shortDisclaimer={
-                  quiz.disclaimerShort ??
+                  quiz.ux?.disclaimers.inProgress ??
                   'Короткая самопроверка: результат носит ознакомительный характер.'
                 }
               />
@@ -307,7 +309,9 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
                   dimensionProfiles={dimensionProfiles}
                   strengths={strengths}
                   growthZones={growthZones}
-                  disclaimer={quiz.disclaimer}
+                  disclaimer={quiz.ux?.disclaimers.result}
+                  resultNote={quiz.ux?.disclaimers.resultNote}
+                  resultLabels={quiz.ux?.resultLabels}
                   onRestart={handleRestart}
                 />
               </m.div>

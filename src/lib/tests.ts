@@ -1,8 +1,38 @@
 import fs from 'fs';
 import path from 'path';
-import type { Quiz, QuizOption, QuizQuestion, QuizResult } from '@/types/test';
+import type {
+  Quiz,
+  QuizOption,
+  QuizQuestion,
+  QuizResult,
+  QuizUxConfig,
+  QuizUxResultLabels,
+} from '@/types/test';
 
 const TESTS_DIR = path.join(process.cwd(), 'data/tests');
+const DEFAULT_IN_PROGRESS_DISCLAIMER = 'Результат носит ознакомительный характер.';
+const DEFAULT_RESULT_NOTE = 'Результат не является диагнозом и не заменяет консультацию специалиста.';
+
+const DEFAULT_RESULT_LABELS: QuizUxResultLabels = {
+  weeklyActionsTitle: 'Что сделать в ближайшую неделю',
+  strengthsTitle: 'Сильные стороны',
+  growthZonesTitle: 'Зоны роста',
+  dimensionsTitle: 'Разрез по измерениям',
+};
+
+const DEFAULT_QUIZ_UX: QuizUxConfig = {
+  disclaimers: {
+    intro: '',
+    inProgress: DEFAULT_IN_PROGRESS_DISCLAIMER,
+    result: '',
+    resultNote: DEFAULT_RESULT_NOTE,
+  },
+  optionOrder: {
+    lockGradatedScales: true,
+    defaultShuffleOptions: true,
+  },
+  resultLabels: DEFAULT_RESULT_LABELS,
+};
 
 function isQuizOption(o: unknown): o is QuizOption {
   if (typeof o !== 'object' || o === null) return false;
@@ -56,6 +86,64 @@ function validateQuiz(data: unknown): Quiz | null {
   return obj as unknown as Quiz;
 }
 
+function isGradatedScale(question: QuizQuestion): boolean {
+  const scores = question.options.map((option) => option.score).sort((a, b) => a - b);
+  if (scores.length < 3) return false;
+  if (new Set(scores).size !== scores.length) return false;
+
+  for (let i = 1; i < scores.length; i += 1) {
+    if (scores[i] - scores[i - 1] !== 1) return false;
+  }
+
+  return true;
+}
+
+function normalizeQuiz(quiz: Quiz): Quiz {
+  const legacyDisclaimer = quiz.disclaimer ?? '';
+  const legacyShortDisclaimer =
+    quiz.disclaimerShort ?? DEFAULT_QUIZ_UX.disclaimers.inProgress;
+
+  const ux: QuizUxConfig = {
+    disclaimers: {
+      intro: quiz.ux?.disclaimers?.intro ?? legacyDisclaimer,
+      inProgress: quiz.ux?.disclaimers?.inProgress ?? legacyShortDisclaimer,
+      result: quiz.ux?.disclaimers?.result ?? legacyDisclaimer,
+      resultNote: quiz.ux?.disclaimers?.resultNote ?? DEFAULT_QUIZ_UX.disclaimers.resultNote,
+    },
+    optionOrder: {
+      lockGradatedScales:
+        quiz.ux?.optionOrder?.lockGradatedScales ?? DEFAULT_QUIZ_UX.optionOrder.lockGradatedScales,
+      defaultShuffleOptions:
+        quiz.ux?.optionOrder?.defaultShuffleOptions ??
+        DEFAULT_QUIZ_UX.optionOrder.defaultShuffleOptions,
+    },
+    resultLabels: {
+      weeklyActionsTitle:
+        quiz.ux?.resultLabels?.weeklyActionsTitle ?? DEFAULT_RESULT_LABELS.weeklyActionsTitle,
+      strengthsTitle: quiz.ux?.resultLabels?.strengthsTitle ?? DEFAULT_RESULT_LABELS.strengthsTitle,
+      growthZonesTitle:
+        quiz.ux?.resultLabels?.growthZonesTitle ?? DEFAULT_RESULT_LABELS.growthZonesTitle,
+      dimensionsTitle: quiz.ux?.resultLabels?.dimensionsTitle ?? DEFAULT_RESULT_LABELS.dimensionsTitle,
+    },
+  };
+
+  const normalizedQuestions = quiz.questions.map((question) => {
+    if (ux.optionOrder.lockGradatedScales && isGradatedScale(question)) {
+      return { ...question, shuffleOptions: false };
+    }
+    return {
+      ...question,
+      shuffleOptions: question.shuffleOptions ?? ux.optionOrder.defaultShuffleOptions,
+    };
+  });
+
+  return {
+    ...quiz,
+    questions: normalizedQuestions,
+    ux,
+  };
+}
+
 export function getAllTests(): Quiz[] {
   if (!fs.existsSync(TESTS_DIR)) return [];
 
@@ -69,7 +157,7 @@ export function getAllTests(): Quiz[] {
       const raw = fs.readFileSync(filePath, 'utf-8');
       const data = JSON.parse(raw);
       const quiz = validateQuiz(data);
-      if (quiz) tests.push(quiz);
+      if (quiz) tests.push(normalizeQuiz(quiz));
     } catch {
       /* skip malformed files */
     }

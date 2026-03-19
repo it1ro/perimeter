@@ -44,6 +44,31 @@ export interface QuizScoring {
   reverseFormula?: string;
 }
 
+export interface QuizUxDisclaimers {
+  intro: string;
+  inProgress: string;
+  result: string;
+  resultNote: string;
+}
+
+export interface QuizUxOptionOrder {
+  lockGradatedScales: boolean;
+  defaultShuffleOptions: boolean;
+}
+
+export interface QuizUxResultLabels {
+  weeklyActionsTitle: string;
+  strengthsTitle: string;
+  growthZonesTitle: string;
+  dimensionsTitle: string;
+}
+
+export interface QuizUxConfig {
+  disclaimers: QuizUxDisclaimers;
+  optionOrder: QuizUxOptionOrder;
+  resultLabels: QuizUxResultLabels;
+}
+
 export interface Quiz {
   id: string;
   version?: string;
@@ -60,4 +85,5 @@ export interface Quiz {
     medium: QuizDimensionResult;
     high: QuizDimensionResult;
   };
+  ux?: Partial<QuizUxConfig>;
 }

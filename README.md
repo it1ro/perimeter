@@ -143,11 +143,31 @@ data/tests/my-test-id.json
 
 ### 2. Заполните по схеме
 
+Актуальный контракт и правила миграции: `data/tests/SCHEMA.md`.
+
 ```json
 {
   "id": "my-test-id",
   "title": "Название теста",
   "description": "Описание теста.",
+  "ux": {
+    "disclaimers": {
+      "intro": "Полный дисклеймер до старта",
+      "inProgress": "Короткий дисклеймер в процессе",
+      "result": "Полный дисклеймер на результате",
+      "resultNote": "Результат не является диагнозом..."
+    },
+    "optionOrder": {
+      "lockGradatedScales": true,
+      "defaultShuffleOptions": true
+    },
+    "resultLabels": {
+      "weeklyActionsTitle": "Что сделать в ближайшую неделю",
+      "strengthsTitle": "Сильные стороны",
+      "growthZonesTitle": "Зоны роста",
+      "dimensionsTitle": "Разрез по измерениям"
+    }
+  },
   "questions": [
     {
       "id": "q1",
@@ -181,6 +201,7 @@ data/tests/my-test-id.json
 | `id` | `string` | Уникальный идентификатор (совпадает с именем файла без `.json`) |
 | `title` | `string` | Название теста |
 | `description` | `string` | Описание теста |
+| `ux` | `QuizUxConfig` | Единые UX-настройки (дисклеймеры, порядок опций, подписи результата) |
 | `questions` | `QuizQuestion[]` | Массив вопросов |
 | `questions[].id` | `string` | Уникальный ID вопроса |
 | `questions[].text` | `string` | Текст вопроса |

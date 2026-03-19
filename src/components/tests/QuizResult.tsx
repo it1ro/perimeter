@@ -5,6 +5,7 @@ import { RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { CopyButton } from '@/components/ui/CopyButton';
 import type { Quiz } from '@/types/test';
+import type { QuizUxResultLabels } from '@/types/test';
 
 interface QuizResultProps {
   title: string;
@@ -18,6 +19,8 @@ interface QuizResultProps {
   strengths: Array<{ dimension: string }>;
   growthZones: Array<{ dimension: string; level: 'low' | 'medium' | 'high' }>;
   disclaimer?: string;
+  resultNote?: string;
+  resultLabels?: QuizUxResultLabels;
   onRestart: () => void;
 }
 
@@ -46,6 +49,8 @@ export function QuizResult({
   strengths,
   growthZones,
   disclaimer,
+  resultNote,
+  resultLabels,
   onRestart,
 }: QuizResultProps) {
   const copyText = `${quizTitle}\n\nМой результат: ${title} (${score} из ${maxScore})\n\n${description}`;
@@ -75,7 +80,9 @@ export function QuizResult({
 
       {actionSteps && actionSteps.length > 0 && (
         <div className="mx-auto mb-8 max-w-lg rounded-xl border border-white/10 bg-background-soft p-4 text-left">
-          <p className="mb-2 text-sm font-medium text-text">Что сделать в ближайшую неделю</p>
+          <p className="mb-2 text-sm font-medium text-text">
+            {resultLabels?.weeklyActionsTitle ?? 'Что сделать в ближайшую неделю'}
+          </p>
           <ul className="space-y-2 text-sm leading-relaxed text-text-muted">
             {actionSteps.map((step, index) => (
               <li key={`${index}-${step}`} className="flex gap-2">
@@ -91,7 +98,9 @@ export function QuizResult({
         <div className="mx-auto mb-8 max-w-lg space-y-4 text-left">
           {strengths.length > 0 && (
             <div className="rounded-xl border border-white/10 bg-background-soft p-4">
-              <p className="mb-2 text-sm font-medium text-text">Сильные стороны</p>
+              <p className="mb-2 text-sm font-medium text-text">
+                {resultLabels?.strengthsTitle ?? 'Сильные стороны'}
+              </p>
               <p className="text-sm leading-relaxed text-text-muted">
                 {strengths
                   .map((item) => dimensionLabels[item.dimension] ?? item.dimension)
@@ -101,7 +110,9 @@ export function QuizResult({
           )}
           {growthZones.length > 0 && (
             <div className="rounded-xl border border-white/10 bg-background-soft p-4">
-              <p className="mb-2 text-sm font-medium text-text">Зоны роста</p>
+              <p className="mb-2 text-sm font-medium text-text">
+                {resultLabels?.growthZonesTitle ?? 'Зоны роста'}
+              </p>
               <p className="text-sm leading-relaxed text-text-muted">
                 {growthZones
                   .map((item) => dimensionLabels[item.dimension] ?? item.dimension)
@@ -121,7 +132,9 @@ export function QuizResult({
 
       {dimensionResults && dimensionProfiles.length > 0 && (
         <div className="mx-auto mb-8 max-w-lg rounded-xl border border-white/10 bg-background-soft p-4 text-left">
-          <p className="mb-3 text-sm font-medium text-text">Разрез по измерениям</p>
+          <p className="mb-3 text-sm font-medium text-text">
+            {resultLabels?.dimensionsTitle ?? 'Разрез по измерениям'}
+          </p>
           <div className="space-y-3">
             {dimensionProfiles.map((item) => {
               const levelMeta =
@@ -150,9 +163,7 @@ export function QuizResult({
       {disclaimer && (
         <div className="mx-auto mb-8 max-w-lg rounded-xl border border-white/10 bg-background-soft px-4 py-3 text-left">
           <p className="text-xs leading-relaxed text-text-muted">{disclaimer}</p>
-          <p className="mt-2 text-xs leading-relaxed text-text-muted">
-            Результат не является диагнозом и не заменяет консультацию специалиста.
-          </p>
+          {resultNote && <p className="mt-2 text-xs leading-relaxed text-text-muted">{resultNote}</p>}
         </div>
       )}
 
