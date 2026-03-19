@@ -59,9 +59,11 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
         return sum;
       }
 
-      const questionMax = Math.max(...question.options.map((option) => option.score));
+      const optionScores = question.options.map((option) => option.score);
+      const questionMax = Math.max(...optionScores);
+      const questionMin = Math.min(...optionScores);
       const adjustedScore = question.reverse
-        ? questionMax - selectedOption.score
+        ? questionMax + questionMin - selectedOption.score
         : selectedOption.score;
 
       if (question.dimension) {
@@ -94,6 +96,7 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
     () => quiz.results.find((r) => scoreState.score >= r.minScore && scoreState.score <= r.maxScore),
     [quiz.results, scoreState.score],
   );
+  const canShowResult = stage === 'result' && Boolean(result);
 
   const dimensionProfiles = useMemo<DimensionProfile[]>(() => {
     return Object.entries(scoreState.dimensionScores)
@@ -171,11 +174,24 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
       const safeIndex = Math.min(Math.max(parsed.currentIndex ?? 0, 0), Math.max(total - 1, 0));
       setAnswers(parsed.answers ?? {});
       setCurrentIndex(safeIndex);
-      setStage(parsed.stage);
+      const resolvedScore = quiz.questions.reduce((sum, question) => {
+        const selectedOptionId = parsed.answers?.[question.id];
+        const selectedOption = question.options.find((option) => option.id === selectedOptionId);
+        if (!selectedOption) return sum;
+        const optionScores = question.options.map((option) => option.score);
+        const questionMax = Math.max(...optionScores);
+        const questionMin = Math.min(...optionScores);
+        return sum + (question.reverse ? questionMax + questionMin - selectedOption.score : selectedOption.score);
+      }, 0);
+      const hasResultForSavedAnswers = quiz.results.some(
+        (range) => resolvedScore >= range.minScore && resolvedScore <= range.maxScore,
+      );
+      const safeStage = parsed.stage === 'result' && !hasResultForSavedAnswers ? 'questions' : parsed.stage;
+      setStage(safeStage);
     } catch {
       window.localStorage.removeItem(storageKey);
     }
-  }, [storageKey, total]);
+  }, [quiz.questions, quiz.results, storageKey, total]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -188,10 +204,16 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
   }, [answers, currentIndex, stage, storageKey]);
 
   const progressPercent =
-    stage === 'intro' ? 0 : stage === 'result' ? 100 : (currentIndex / total) * 100;
+    stage === 'intro' ? 0 : stage === 'result' ? 100 : ((currentIndex + 1) / total) * 100;
   const currentQuestion = quiz.questions[currentIndex];
   const selectedOptionId = currentQuestion ? answers[currentQuestion.id] : undefined;
   const isNextDisabled = stage === 'questions' && !selectedOptionId;
+  const introDisclaimer = quiz.ux?.disclaimers?.intro;
+  const inProgressDisclaimer =
+    quiz.ux?.disclaimers?.inProgress ??
+    'Короткая самопроверка: результат носит ознакомительный характер.';
+  const resultDisclaimer = quiz.ux?.disclaimers?.result;
+  const resultNote = quiz.ux?.disclaimers?.resultNote;
 
   return (
     <div className="mx-auto max-w-2xl">
@@ -237,9 +259,9 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
               {quiz.instructions && (
                 <p className="text-sm leading-relaxed text-text-muted">{quiz.instructions}</p>
               )}
-              {quiz.ux?.disclaimers.intro && (
+              {introDisclaimer && (
                 <p className="mt-3 text-xs leading-relaxed text-text-muted">
-                  {quiz.ux.disclaimers.intro}
+                  {introDisclaimer}
                 </p>
               )}
               <button
@@ -264,10 +286,7 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
                 question={currentQuestion}
                 selectedOptionId={selectedOptionId}
                 onSelectOption={handleSelectAnswer}
-                shortDisclaimer={
-                  quiz.ux?.disclaimers.inProgress ??
-                  'Короткая самопроверка: результат носит ознакомительный характер.'
-                }
+                shortDisclaimer={inProgressDisclaimer}
               />
               <div className="mt-6 flex items-center justify-between gap-3">
                 <button
@@ -291,7 +310,7 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
               </div>
             </m.div>
           ) : (
-            result && (
+            canShowResult && result && (
               <m.div
                 key="result"
                 initial={{ opacity: 0, scale: 0.96 }}
@@ -309,8 +328,8 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
                   dimensionProfiles={dimensionProfiles}
                   strengths={strengths}
                   growthZones={growthZones}
-                  disclaimer={quiz.ux?.disclaimers.result}
-                  resultNote={quiz.ux?.disclaimers.resultNote}
+                  disclaimer={resultDisclaimer}
+                  resultNote={resultNote}
                   resultLabels={quiz.ux?.resultLabels}
                   onRestart={handleRestart}
                 />

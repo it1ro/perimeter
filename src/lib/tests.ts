@@ -71,6 +71,32 @@ function isQuizResult(r: unknown): r is QuizResult {
   );
 }
 
+function hasContinuousResultRanges(results: QuizResult[]): boolean {
+  const sorted = [...results].sort((a, b) => a.minScore - b.minScore);
+  for (let i = 0; i < sorted.length; i += 1) {
+    const current = sorted[i];
+    if (current.minScore > current.maxScore) return false;
+    if (i === 0) continue;
+    const previous = sorted[i - 1];
+    if (current.minScore !== previous.maxScore + 1) return false;
+  }
+  return true;
+}
+
+function areResultRangesCoveringQuestions(quiz: Quiz): boolean {
+  const minPossibleScore = quiz.questions.reduce(
+    (sum, question) => sum + Math.min(...question.options.map((option) => option.score)),
+    0,
+  );
+  const maxPossibleScore = quiz.questions.reduce(
+    (sum, question) => sum + Math.max(...question.options.map((option) => option.score)),
+    0,
+  );
+  const sorted = [...quiz.results].sort((a, b) => a.minScore - b.minScore);
+  if (sorted.length === 0) return false;
+  return sorted[0].minScore <= minPossibleScore && sorted[sorted.length - 1].maxScore >= maxPossibleScore;
+}
+
 function validateQuiz(data: unknown): Quiz | null {
   if (typeof data !== 'object' || data === null) return null;
   const obj = data as Record<string, unknown>;
@@ -83,7 +109,11 @@ function validateQuiz(data: unknown): Quiz | null {
   if (!Array.isArray(obj.results) || obj.results.length === 0) return null;
   if (!obj.results.every(isQuizResult)) return null;
 
-  return obj as unknown as Quiz;
+  const quiz = obj as unknown as Quiz;
+  if (!hasContinuousResultRanges(quiz.results)) return null;
+  if (!areResultRangesCoveringQuestions(quiz)) return null;
+
+  return quiz;
 }
 
 function isGradatedScale(question: QuizQuestion): boolean {
