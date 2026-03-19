@@ -287,6 +287,7 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
                 selectedOptionId={selectedOptionId}
                 onSelectOption={handleSelectAnswer}
                 shortDisclaimer={inProgressDisclaimer}
+                lockGradatedScales={quiz.ux?.optionOrder?.lockGradatedScales ?? true}
               />
               <div className="mt-6 flex items-center justify-between gap-3">
                 <button

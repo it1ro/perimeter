@@ -9,6 +9,7 @@ interface QuizQuestionProps {
   selectedOptionId?: string;
   onSelectOption: (optionId: string) => void;
   shortDisclaimer?: string;
+  lockGradatedScales?: boolean;
 }
 
 export function QuizQuestion({
@@ -16,6 +17,7 @@ export function QuizQuestion({
   selectedOptionId,
   onSelectOption,
   shortDisclaimer,
+  lockGradatedScales = true,
 }: QuizQuestionProps) {
   const isGradatedScale = useMemo(() => {
     const scores = question.options.map((option) => option.score);
@@ -29,12 +31,12 @@ export function QuizQuestion({
   }, [question.options]);
 
   const options = useMemo(() => {
-    if (isGradatedScale) return question.options;
+    if (isGradatedScale && lockGradatedScales) return question.options;
     if (question.shuffleOptions === true) {
       return [...question.options].sort(() => Math.random() - 0.5);
     }
     return question.options;
-  }, [isGradatedScale, question.options, question.shuffleOptions]);
+  }, [isGradatedScale, lockGradatedScales, question.options, question.shuffleOptions]);
 
   return (
     <div>
