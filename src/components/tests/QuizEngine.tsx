@@ -299,10 +299,12 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
                 <QuizResult
                   title={result.title}
                   description={result.description}
+                  actionSteps={result.actionSteps}
                   score={scoreState.score}
                   maxScore={maxScore}
                   quizTitle={quiz.title}
                   dimensionResults={quiz.dimensionResults}
+                  dimensionProfiles={dimensionProfiles}
                   strengths={strengths}
                   growthZones={growthZones}
                   disclaimer={quiz.disclaimer}

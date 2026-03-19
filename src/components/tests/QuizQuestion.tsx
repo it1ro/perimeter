@@ -71,6 +71,17 @@ export function QuizQuestion({
       {shortDisclaimer && (
         <p className="mt-4 text-xs leading-relaxed text-text-muted">{shortDisclaimer}</p>
       )}
+      {question.reverse && (
+        <details className="mt-3 rounded-lg border border-white/10 bg-background-soft px-3 py-2 text-left">
+          <summary className="cursor-pointer text-xs font-medium text-text-muted">
+            Как учитывается этот вопрос
+          </summary>
+          <p className="mt-2 text-xs leading-relaxed text-text-muted">
+            Это инверсный вопрос: более жесткая реакция дает меньше баллов, а спокойная и
+            уважительная реакция - больше. Это помогает точнее оценить устойчивость границ.
+          </p>
+        </details>
+      )}
     </div>
   );
 }

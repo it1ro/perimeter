@@ -29,11 +29,15 @@ function isQuizQuestion(q: unknown): q is QuizQuestion {
 function isQuizResult(r: unknown): r is QuizResult {
   if (typeof r !== 'object' || r === null) return false;
   const obj = r as Record<string, unknown>;
+  const hasValidActionSteps =
+    obj.actionSteps === undefined ||
+    (Array.isArray(obj.actionSteps) && obj.actionSteps.every((item) => typeof item === 'string'));
   return (
     typeof obj.minScore === 'number' &&
     typeof obj.maxScore === 'number' &&
     typeof obj.title === 'string' &&
-    typeof obj.description === 'string'
+    typeof obj.description === 'string' &&
+    hasValidActionSteps
   );
 }
 

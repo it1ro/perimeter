@@ -9,10 +9,12 @@ import type { Quiz } from '@/types/test';
 interface QuizResultProps {
   title: string;
   description: string;
+  actionSteps?: string[];
   score: number;
   maxScore: number;
   quizTitle: string;
   dimensionResults?: Quiz['dimensionResults'];
+  dimensionProfiles: Array<{ dimension: string; level: 'low' | 'medium' | 'high'; ratio: number }>;
   strengths: Array<{ dimension: string }>;
   growthZones: Array<{ dimension: string; level: 'low' | 'medium' | 'high' }>;
   disclaimer?: string;
@@ -35,10 +37,12 @@ const dimensionLabels: Record<string, string> = {
 export function QuizResult({
   title,
   description,
+  actionSteps,
   score,
   maxScore,
   quizTitle,
   dimensionResults,
+  dimensionProfiles,
   strengths,
   growthZones,
   disclaimer,
@@ -69,6 +73,20 @@ export function QuizResult({
         {description}
       </p>
 
+      {actionSteps && actionSteps.length > 0 && (
+        <div className="mx-auto mb-8 max-w-lg rounded-xl border border-white/10 bg-background-soft p-4 text-left">
+          <p className="mb-2 text-sm font-medium text-text">Что сделать в ближайшую неделю</p>
+          <ul className="space-y-2 text-sm leading-relaxed text-text-muted">
+            {actionSteps.map((step, index) => (
+              <li key={`${index}-${step}`} className="flex gap-2">
+                <span className="mt-[2px] text-sage">-</span>
+                <span>{step}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {(strengths.length > 0 || growthZones.length > 0) && (
         <div className="mx-auto mb-8 max-w-lg space-y-4 text-left">
           {strengths.length > 0 && (
@@ -98,6 +116,34 @@ export function QuizResult({
               )}
             </div>
           )}
+        </div>
+      )}
+
+      {dimensionResults && dimensionProfiles.length > 0 && (
+        <div className="mx-auto mb-8 max-w-lg rounded-xl border border-white/10 bg-background-soft p-4 text-left">
+          <p className="mb-3 text-sm font-medium text-text">Разрез по измерениям</p>
+          <div className="space-y-3">
+            {dimensionProfiles.map((item) => {
+              const levelMeta =
+                item.level === 'high'
+                  ? dimensionResults.high
+                  : item.level === 'medium'
+                    ? dimensionResults.medium
+                    : dimensionResults.low;
+
+              return (
+                <div key={item.dimension} className="rounded-lg border border-white/10 px-3 py-2">
+                  <div className="mb-1 flex items-center justify-between gap-2">
+                    <p className="text-sm text-text">
+                      {dimensionLabels[item.dimension] ?? item.dimension}
+                    </p>
+                    <span className="text-xs text-text-muted">{levelMeta.title}</span>
+                  </div>
+                  <p className="text-xs leading-relaxed text-text-muted">{levelMeta.description}</p>
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
 

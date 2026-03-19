@@ -30,6 +30,7 @@ export interface QuizResult {
   maxScore: number;
   title: string;
   description: string;
+  actionSteps?: string[];
 }
 
 export interface QuizDimensionResult {
