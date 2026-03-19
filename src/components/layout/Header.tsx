@@ -29,7 +29,7 @@ export function Header() {
           <span className="absolute left-2 top-1 text-[10px] font-semibold tracking-wider text-sage">
             Мой
           </span>
-          Периметр
+          Мой Периметр
         </Link>
 
         {/* Desktop nav */}

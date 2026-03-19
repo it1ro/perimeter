@@ -7,7 +7,7 @@ import { getAllArticles } from '@/lib/articles';
 import { SITE_URL, SITE_NAME } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Периметр — психология ясно',
+  title: 'Мой Периметр — психология ясно',
   description:
     'Статьи, тесты и инфографика о ментальном здоровье — понятно, честно и без лишней воды. Разбираемся в психологии вместе.',
   keywords: [
@@ -22,8 +22,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'ru_RU',
     url: '/',
-    siteName: 'Периметр',
-    title: 'Периметр — психология ясно',
+    siteName: 'Мой Периметр',
+    title: 'Мой Периметр — психология ясно',
     description:
       'Статьи, тесты и инфографика о ментальном здоровье — понятно, честно и без лишней воды.',
     images: [
@@ -31,13 +31,13 @@ export const metadata: Metadata = {
         url: '/images/og/og-default.png',
         width: 1200,
         height: 630,
-        alt: 'Периметр — психология ясно',
+        alt: 'Мой Периметр — психология ясно',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Периметр — психология ясно',
+    title: 'Мой Периметр — психология ясно',
     description:
       'Статьи, тесты и инфографика о ментальном здоровье — понятно, честно и без лишней воды.',
     images: ['/images/og/og-default.png'],

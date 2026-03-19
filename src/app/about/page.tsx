@@ -4,12 +4,12 @@ import { Heart, Target, BookOpen, Users } from 'lucide-react';
 export const metadata: Metadata = {
   title: 'О проекте',
   description:
-    'Периметр — проект о психологии и ментальном здоровье. Узнайте о нашей миссии, целях и подходе.',
+    'Мой Периметр — проект о психологии и ментальном здоровье. Узнайте о нашей миссии, целях и подходе.',
   openGraph: {
-    title: 'О проекте | Периметр',
+    title: 'О проекте | Мой Периметр',
     description:
-      'Периметр — проект о психологии и ментальном здоровье. Узнайте о нашей миссии, целях и подходе.',
-    images: [{ url: '/images/og/og-default.png', width: 1200, height: 630, alt: 'Периметр — О проекте' }],
+      'Мой Периметр — проект о психологии и ментальном здоровье. Узнайте о нашей миссии, целях и подходе.',
+    images: [{ url: '/images/og/og-default.png', width: 1200, height: 630, alt: 'Мой Периметр — О проекте' }],
   },
 };
 
@@ -63,11 +63,11 @@ export default function AboutPage() {
 
           <div>
             <h2 className="font-display mb-4 text-2xl font-bold text-text">
-              Привет! Мы — команда Периметра.
+              Привет! Мы — команда Моего Периметра.
             </h2>
             <div className="space-y-3 text-sm leading-relaxed text-text-muted sm:text-base">
               <p>
-                <strong className="text-text">Периметр</strong> — это проект о психологии
+                <strong className="text-text">Мой Периметр</strong> — это проект о психологии
                 и ментальном здоровье, созданный для тех, кто хочет лучше понимать себя
                 и свои отношения с миром.
               </p>

@@ -7,10 +7,10 @@ export const metadata: Metadata = {
   description:
     'Материалы о психологии, ментальном здоровье, отношениях и саморазвитии — понятно, честно, без воды.',
   openGraph: {
-    title: 'Статьи | Периметр',
+    title: 'Статьи | Мой Периметр',
     description:
       'Материалы о психологии, ментальном здоровье, отношениях и саморазвитии.',
-    images: [{ url: '/images/og/og-default.png', width: 1200, height: 630, alt: 'Периметр — Статьи' }],
+    images: [{ url: '/images/og/og-default.png', width: 1200, height: 630, alt: 'Мой Периметр — Статьи' }],
   },
 };
 

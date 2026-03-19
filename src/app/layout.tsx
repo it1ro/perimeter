@@ -11,11 +11,11 @@ import { SITE_URL, SITE_NAME } from '@/lib/constants';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Периметр — психология ясно',
-    template: '%s | Периметр',
+    default: 'Мой Периметр — психология ясно',
+    template: '%s | Мой Периметр',
   },
   description:
-    'Периметр — сайт о психологии и ментальном здоровье. Статьи, тесты, инфографика — понятно и без воды.',
+    'Мой Периметр — сайт о психологии и ментальном здоровье. Статьи, тесты, инфографика — понятно и без воды.',
   keywords: ['психология', 'ментальное здоровье', 'статьи', 'тесты'],
   authors: [{ name: SITE_NAME }],
   openGraph: {

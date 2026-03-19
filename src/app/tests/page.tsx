@@ -9,10 +9,10 @@ export const metadata: Metadata = {
   description:
     'Психологические тесты с научной базой — пройдите онлайн, узнайте результат мгновенно.',
   openGraph: {
-    title: 'Тесты | Периметр',
+    title: 'Тесты | Мой Периметр',
     description:
       'Психологические тесты с научной базой — пройдите онлайн, узнайте результат мгновенно.',
-    images: [{ url: '/images/og/og-default.png', width: 1200, height: 630, alt: 'Периметр — Тесты' }],
+    images: [{ url: '/images/og/og-default.png', width: 1200, height: 630, alt: 'Мой Периметр — Тесты' }],
   },
 };
 

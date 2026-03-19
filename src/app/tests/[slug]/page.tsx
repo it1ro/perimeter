@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: test.title,
     description: test.description,
     openGraph: {
-      title: `${test.title} | Периметр`,
+      title: `${test.title} | Мой Периметр`,
       description: test.description,
       images: [{ url: '/images/og/og-default.png', width: 1200, height: 630, alt: test.title }],
     },
@@ -63,7 +63,7 @@ export default function TestPage({ params }: PageProps) {
     },
     provider: {
       '@type': 'Organization',
-      name: 'Периметр',
+      name: 'Мой Периметр',
     },
     inLanguage: 'ru',
     numberOfQuestions: test.questions.length,

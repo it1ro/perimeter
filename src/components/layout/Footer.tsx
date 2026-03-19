@@ -29,7 +29,7 @@ export function Footer() {
               href="/"
               className="text-lg font-bold text-text transition-colors hover:text-sage"
             >
-              Периметр
+              Мой Периметр
             </Link>
             <p className="mt-2 text-sm text-text-muted">
               Психология ясно — без воды и жаргона.
@@ -59,7 +59,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-text-muted">
-          © {year} Периметр. Все права защищены.
+          © {year} Мой Периметр. Все права защищены.
         </div>
       </div>
     </footer>
