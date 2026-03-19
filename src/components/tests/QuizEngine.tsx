@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, m } from 'framer-motion';
 import type { Quiz } from '@/types/test';
 import { QuizQuestion } from './QuizQuestion';
@@ -20,6 +20,12 @@ interface DimensionProfile {
   level: DimensionLevel;
 }
 
+interface SavedQuizState {
+  stage: Stage;
+  currentIndex: number;
+  answers: Record<string, string>;
+}
+
 const slideVariants = {
   enter: (direction: number) => ({
     x: direction > 0 ? 120 : -120,
@@ -34,14 +40,47 @@ const slideVariants = {
 
 export function QuizEngine({ quiz }: { quiz: Quiz }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [score, setScore] = useState(0);
   const [stage, setStage] = useState<Stage>('intro');
   const [direction, setDirection] = useState(1);
-  const [dimensionScores, setDimensionScores] = useState<
-    Record<string, DimensionScoreState>
-  >({});
+  const [answers, setAnswers] = useState<Record<string, string>>({});
 
   const total = quiz.questions.length;
+  const storageKey = useMemo(
+    () => `quiz-progress:${quiz.id}:${quiz.version ?? '1'}`,
+    [quiz.id, quiz.version],
+  );
+
+  const scoreState = useMemo(() => {
+    const dimensionScoresAccumulator: Record<string, DimensionScoreState> = {};
+    const totalScore = quiz.questions.reduce((sum, question) => {
+      const selectedOptionId = answers[question.id];
+      const selectedOption = question.options.find((option) => option.id === selectedOptionId);
+      if (!selectedOption) {
+        return sum;
+      }
+
+      const questionMax = Math.max(...question.options.map((option) => option.score));
+      const adjustedScore = question.reverse
+        ? questionMax - selectedOption.score
+        : selectedOption.score;
+
+      if (question.dimension) {
+        const current = dimensionScoresAccumulator[question.dimension] ?? { raw: 0, max: 0 };
+        dimensionScoresAccumulator[question.dimension] = {
+          raw: current.raw + adjustedScore,
+          max: current.max + questionMax,
+        };
+      }
+
+      return sum + adjustedScore;
+    }, 0);
+
+    return {
+      score: totalScore,
+      dimensionScores: dimensionScoresAccumulator,
+    };
+  }, [answers, quiz.questions]);
+
   const maxScore = useMemo(
     () =>
       quiz.questions.reduce(
@@ -52,12 +91,12 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
   );
 
   const result = useMemo(
-    () => quiz.results.find((r) => score >= r.minScore && score <= r.maxScore),
-    [quiz.results, score],
+    () => quiz.results.find((r) => scoreState.score >= r.minScore && scoreState.score <= r.maxScore),
+    [quiz.results, scoreState.score],
   );
 
   const dimensionProfiles = useMemo<DimensionProfile[]>(() => {
-    return Object.entries(dimensionScores)
+    return Object.entries(scoreState.dimensionScores)
       .map(([dimension, value]) => {
         const ratio = value.max > 0 ? value.raw / value.max : 0;
         const level: DimensionLevel =
@@ -65,7 +104,7 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
         return { dimension, ratio, level };
       })
       .sort((a, b) => b.ratio - a.ratio);
-  }, [dimensionScores]);
+  }, [scoreState.dimensionScores]);
 
   const strengths = useMemo(
     () => dimensionProfiles.filter((d) => d.level === 'high').slice(0, 3),
@@ -81,53 +120,78 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
     [dimensionProfiles],
   );
 
-  const handleAnswer = useCallback(
-    (selectedScore: number) => {
+  const handleSelectAnswer = useCallback(
+    (optionId: string) => {
       const question = quiz.questions[currentIndex];
-      const questionMax = Math.max(...question.options.map((o) => o.score));
-      const adjustedScore = question.reverse ? questionMax - selectedScore : selectedScore;
-      const newScore = score + adjustedScore;
-      setScore(newScore);
-
-      if (question.dimension) {
-        const dimension = question.dimension;
-        setDimensionScores((prev) => {
-          const current = prev[dimension] ?? { raw: 0, max: 0 };
-          return {
-            ...prev,
-            [dimension]: {
-              raw: current.raw + adjustedScore,
-              max: current.max + questionMax,
-            },
-          };
-        });
-      }
-
-      if (currentIndex + 1 < total) {
-        setDirection(1);
-        setCurrentIndex((prev) => prev + 1);
-      } else {
-        setStage('result');
-      }
+      setAnswers((prev) => ({ ...prev, [question.id]: optionId }));
     },
-    [score, currentIndex, total, quiz.questions],
+    [currentIndex, quiz.questions],
   );
+
+  const handleNext = useCallback(() => {
+    if (currentIndex + 1 < total) {
+      setDirection(1);
+      setCurrentIndex((prev) => prev + 1);
+      return;
+    }
+    setStage('result');
+  }, [currentIndex, total]);
+
+  const handlePrev = useCallback(() => {
+    if (currentIndex === 0) return;
+    setDirection(-1);
+    setCurrentIndex((prev) => prev - 1);
+  }, [currentIndex]);
 
   const handleRestart = useCallback(() => {
     setDirection(-1);
     setCurrentIndex(0);
-    setScore(0);
-    setDimensionScores({});
+    setAnswers({});
     setStage('intro');
-  }, []);
+    if (typeof window !== 'undefined') {
+      window.localStorage.removeItem(storageKey);
+    }
+  }, [storageKey]);
 
   const handleStart = useCallback(() => {
     setDirection(1);
     setStage('questions');
   }, []);
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const raw = window.localStorage.getItem(storageKey);
+    if (!raw) return;
+
+    try {
+      const parsed = JSON.parse(raw) as SavedQuizState;
+      const isValidStage =
+        parsed.stage === 'intro' || parsed.stage === 'questions' || parsed.stage === 'result';
+      if (!isValidStage) return;
+      const safeIndex = Math.min(Math.max(parsed.currentIndex ?? 0, 0), Math.max(total - 1, 0));
+      setAnswers(parsed.answers ?? {});
+      setCurrentIndex(safeIndex);
+      setStage(parsed.stage);
+    } catch {
+      window.localStorage.removeItem(storageKey);
+    }
+  }, [storageKey, total]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const payload: SavedQuizState = {
+      stage,
+      currentIndex,
+      answers,
+    };
+    window.localStorage.setItem(storageKey, JSON.stringify(payload));
+  }, [answers, currentIndex, stage, storageKey]);
+
   const progressPercent =
     stage === 'intro' ? 0 : stage === 'result' ? 100 : (currentIndex / total) * 100;
+  const currentQuestion = quiz.questions[currentIndex];
+  const selectedOptionId = currentQuestion ? answers[currentQuestion.id] : undefined;
+  const isNextDisabled = stage === 'questions' && !selectedOptionId;
 
   return (
     <div className="mx-auto max-w-2xl">
@@ -195,13 +259,34 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
               transition={{ duration: 0.3, ease: 'easeOut' }}
             >
               <QuizQuestion
-                question={quiz.questions[currentIndex]}
-                onAnswer={handleAnswer}
+                question={currentQuestion}
+                selectedOptionId={selectedOptionId}
+                onSelectOption={handleSelectAnswer}
                 shortDisclaimer={
                   quiz.disclaimerShort ??
                   'Короткая самопроверка: результат носит ознакомительный характер.'
                 }
               />
+              <div className="mt-6 flex items-center justify-between gap-3">
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  disabled={currentIndex === 0}
+                  className="inline-flex items-center justify-center rounded-lg border border-white/15 px-4 py-2 text-sm font-medium text-text transition-colors hover:border-sage/40 hover:text-sage disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  Назад
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  disabled={isNextDisabled}
+                  className="inline-flex items-center justify-center rounded-lg bg-sage px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-sage-600 disabled:cursor-not-allowed disabled:bg-sage/60"
+                >
+                  {currentIndex + 1 === total
+                    ? 'Сохранить и завершить'
+                    : 'Сохранить и продолжить'}
+                </button>
+              </div>
             </m.div>
           ) : (
             result && (
@@ -214,7 +299,7 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
                 <QuizResult
                   title={result.title}
                   description={result.description}
-                  score={score}
+                  score={scoreState.score}
                   maxScore={maxScore}
                   quizTitle={quiz.title}
                   dimensionResults={quiz.dimensionResults}
