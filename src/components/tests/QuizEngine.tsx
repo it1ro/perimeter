@@ -6,7 +6,7 @@ import type { Quiz } from '@/types/test';
 import { QuizQuestion } from './QuizQuestion';
 import { QuizResult } from './QuizResult';
 
-type Stage = 'questions' | 'result';
+type Stage = 'intro' | 'questions' | 'result';
 type DimensionLevel = 'low' | 'medium' | 'high';
 
 interface DimensionScoreState {
@@ -35,7 +35,7 @@ const slideVariants = {
 export function QuizEngine({ quiz }: { quiz: Quiz }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const [stage, setStage] = useState<Stage>('questions');
+  const [stage, setStage] = useState<Stage>('intro');
   const [direction, setDirection] = useState(1);
   const [dimensionScores, setDimensionScores] = useState<
     Record<string, DimensionScoreState>
@@ -118,10 +118,16 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
     setCurrentIndex(0);
     setScore(0);
     setDimensionScores({});
+    setStage('intro');
+  }, []);
+
+  const handleStart = useCallback(() => {
+    setDirection(1);
     setStage('questions');
   }, []);
 
-  const progressPercent = stage === 'result' ? 100 : (currentIndex / total) * 100;
+  const progressPercent =
+    stage === 'intro' ? 0 : stage === 'result' ? 100 : (currentIndex / total) * 100;
 
   return (
     <div className="mx-auto max-w-2xl">
@@ -131,6 +137,8 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
           <span>
             {stage === 'result'
               ? 'Результат'
+              : stage === 'intro'
+                ? 'Подготовка'
               : `Вопрос ${currentIndex + 1} из ${total}`}
           </span>
           <span>{Math.round(progressPercent)}%</span>
@@ -154,7 +162,29 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
       {/* Content */}
       <div className="relative min-h-[320px]">
         <AnimatePresence mode="wait" custom={direction}>
-          {stage === 'questions' ? (
+          {stage === 'intro' ? (
+            <m.div
+              key="intro"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className="rounded-2xl border border-white/10 bg-background-soft p-6 text-left"
+            >
+              {quiz.instructions && (
+                <p className="text-sm leading-relaxed text-text-muted">{quiz.instructions}</p>
+              )}
+              {quiz.disclaimer && (
+                <p className="mt-3 text-xs leading-relaxed text-text-muted">{quiz.disclaimer}</p>
+              )}
+              <button
+                type="button"
+                onClick={handleStart}
+                className="mt-5 inline-flex items-center justify-center rounded-lg bg-sage px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-sage-600"
+              >
+                Начать тест
+              </button>
+            </m.div>
+          ) : stage === 'questions' ? (
             <m.div
               key={`question-${currentIndex}`}
               custom={direction}
@@ -167,6 +197,10 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
               <QuizQuestion
                 question={quiz.questions[currentIndex]}
                 onAnswer={handleAnswer}
+                shortDisclaimer={
+                  quiz.disclaimerShort ??
+                  'Короткая самопроверка: результат носит ознакомительный характер.'
+                }
               />
             </m.div>
           ) : (
@@ -186,6 +220,7 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
                   dimensionResults={quiz.dimensionResults}
                   strengths={strengths}
                   growthZones={growthZones}
+                  disclaimer={quiz.disclaimer}
                   onRestart={handleRestart}
                 />
               </m.div>

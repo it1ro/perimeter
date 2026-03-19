@@ -15,6 +15,7 @@ interface QuizResultProps {
   dimensionResults?: Quiz['dimensionResults'];
   strengths: Array<{ dimension: string }>;
   growthZones: Array<{ dimension: string; level: 'low' | 'medium' | 'high' }>;
+  disclaimer?: string;
   onRestart: () => void;
 }
 
@@ -40,6 +41,7 @@ export function QuizResult({
   dimensionResults,
   strengths,
   growthZones,
+  disclaimer,
   onRestart,
 }: QuizResultProps) {
   const copyText = `${quizTitle}\n\nМой результат: ${title} (${score} из ${maxScore})\n\n${description}`;
@@ -96,6 +98,15 @@ export function QuizResult({
               )}
             </div>
           )}
+        </div>
+      )}
+
+      {disclaimer && (
+        <div className="mx-auto mb-8 max-w-lg rounded-xl border border-white/10 bg-background-soft px-4 py-3 text-left">
+          <p className="text-xs leading-relaxed text-text-muted">{disclaimer}</p>
+          <p className="mt-2 text-xs leading-relaxed text-text-muted">
+            Результат не является диагнозом и не заменяет консультацию специалиста.
+          </p>
         </div>
       )}
 

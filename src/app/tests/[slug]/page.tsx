@@ -95,16 +95,6 @@ export default function TestPage({ params }: PageProps) {
             <p className="mx-auto max-w-lg text-base leading-relaxed text-text-muted">
               {test.description}
             </p>
-            {test.instructions && (
-              <p className="mx-auto mt-4 max-w-lg rounded-xl border border-white/10 bg-background-soft px-4 py-3 text-sm leading-relaxed text-text-muted">
-                {test.instructions}
-              </p>
-            )}
-            {test.disclaimer && (
-              <p className="mx-auto mt-3 max-w-lg text-xs leading-relaxed text-text-muted">
-                {test.disclaimer}
-              </p>
-            )}
           </header>
 
           <QuizEngine quiz={test} />

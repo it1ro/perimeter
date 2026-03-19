@@ -7,14 +7,29 @@ import type { QuizQuestion as QuizQuestionType } from '@/types/test';
 interface QuizQuestionProps {
   question: QuizQuestionType;
   onAnswer: (score: number) => void;
+  shortDisclaimer?: string;
 }
 
-export function QuizQuestion({ question, onAnswer }: QuizQuestionProps) {
+export function QuizQuestion({ question, onAnswer, shortDisclaimer }: QuizQuestionProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const isGradatedScale = useMemo(() => {
+    const scores = question.options.map((option) => option.score);
+    if (scores.length < 3) return false;
+    const sorted = [...scores].sort((a, b) => a - b);
+    if (new Set(sorted).size !== sorted.length) return false;
+    for (let i = 1; i < sorted.length; i += 1) {
+      if (sorted[i] - sorted[i - 1] !== 1) return false;
+    }
+    return true;
+  }, [question.options]);
+
   const options = useMemo(() => {
-    if (question.shuffleOptions === false) return question.options;
-    return [...question.options].sort(() => Math.random() - 0.5);
-  }, [question.options, question.shuffleOptions]);
+    if (isGradatedScale) return question.options;
+    if (question.shuffleOptions === true) {
+      return [...question.options].sort(() => Math.random() - 0.5);
+    }
+    return question.options;
+  }, [isGradatedScale, question.options, question.shuffleOptions]);
 
   const handleSelect = (optionId: string, score: number) => {
     if (selectedId) return;
@@ -56,6 +71,10 @@ export function QuizQuestion({ question, onAnswer }: QuizQuestionProps) {
           );
         })}
       </div>
+
+      {shortDisclaimer && (
+        <p className="mt-4 text-xs leading-relaxed text-text-muted">{shortDisclaimer}</p>
+      )}
     </div>
   );
 }

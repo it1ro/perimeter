@@ -50,6 +50,7 @@ export interface Quiz {
   description: string;
   instructions?: string;
   disclaimer?: string;
+  disclaimerShort?: string;
   questions: QuizQuestion[];
   results: QuizResult[];
   scoring?: QuizScoring;
