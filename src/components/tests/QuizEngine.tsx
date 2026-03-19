@@ -7,6 +7,18 @@ import { QuizQuestion } from './QuizQuestion';
 import { QuizResult } from './QuizResult';
 
 type Stage = 'questions' | 'result';
+type DimensionLevel = 'low' | 'medium' | 'high';
+
+interface DimensionScoreState {
+  raw: number;
+  max: number;
+}
+
+interface DimensionProfile {
+  dimension: string;
+  ratio: number;
+  level: DimensionLevel;
+}
 
 const slideVariants = {
   enter: (direction: number) => ({
@@ -25,6 +37,9 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
   const [score, setScore] = useState(0);
   const [stage, setStage] = useState<Stage>('questions');
   const [direction, setDirection] = useState(1);
+  const [dimensionScores, setDimensionScores] = useState<
+    Record<string, DimensionScoreState>
+  >({});
 
   const total = quiz.questions.length;
   const maxScore = useMemo(
@@ -41,10 +56,52 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
     [quiz.results, score],
   );
 
+  const dimensionProfiles = useMemo<DimensionProfile[]>(() => {
+    return Object.entries(dimensionScores)
+      .map(([dimension, value]) => {
+        const ratio = value.max > 0 ? value.raw / value.max : 0;
+        const level: DimensionLevel =
+          ratio < 0.4 ? 'low' : ratio < 0.7 ? 'medium' : 'high';
+        return { dimension, ratio, level };
+      })
+      .sort((a, b) => b.ratio - a.ratio);
+  }, [dimensionScores]);
+
+  const strengths = useMemo(
+    () => dimensionProfiles.filter((d) => d.level === 'high').slice(0, 3),
+    [dimensionProfiles],
+  );
+
+  const growthZones = useMemo(
+    () =>
+      dimensionProfiles
+        .filter((d) => d.level !== 'high')
+        .sort((a, b) => a.ratio - b.ratio)
+        .slice(0, 2),
+    [dimensionProfiles],
+  );
+
   const handleAnswer = useCallback(
-    (points: number) => {
-      const newScore = score + points;
+    (selectedScore: number) => {
+      const question = quiz.questions[currentIndex];
+      const questionMax = Math.max(...question.options.map((o) => o.score));
+      const adjustedScore = question.reverse ? questionMax - selectedScore : selectedScore;
+      const newScore = score + adjustedScore;
       setScore(newScore);
+
+      if (question.dimension) {
+        const dimension = question.dimension;
+        setDimensionScores((prev) => {
+          const current = prev[dimension] ?? { raw: 0, max: 0 };
+          return {
+            ...prev,
+            [dimension]: {
+              raw: current.raw + adjustedScore,
+              max: current.max + questionMax,
+            },
+          };
+        });
+      }
 
       if (currentIndex + 1 < total) {
         setDirection(1);
@@ -53,13 +110,14 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
         setStage('result');
       }
     },
-    [score, currentIndex, total],
+    [score, currentIndex, total, quiz.questions],
   );
 
   const handleRestart = useCallback(() => {
     setDirection(-1);
     setCurrentIndex(0);
     setScore(0);
+    setDimensionScores({});
     setStage('questions');
   }, []);
 
@@ -125,6 +183,9 @@ export function QuizEngine({ quiz }: { quiz: Quiz }) {
                   score={score}
                   maxScore={maxScore}
                   quizTitle={quiz.title}
+                  dimensionResults={quiz.dimensionResults}
+                  strengths={strengths}
+                  growthZones={growthZones}
                   onRestart={handleRestart}
                 />
               </m.div>

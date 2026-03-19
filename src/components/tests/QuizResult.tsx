@@ -4,6 +4,7 @@ import { m } from 'framer-motion';
 import { RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { CopyButton } from '@/components/ui/CopyButton';
+import type { Quiz } from '@/types/test';
 
 interface QuizResultProps {
   title: string;
@@ -11,8 +12,24 @@ interface QuizResultProps {
   score: number;
   maxScore: number;
   quizTitle: string;
+  dimensionResults?: Quiz['dimensionResults'];
+  strengths: Array<{ dimension: string }>;
+  growthZones: Array<{ dimension: string; level: 'low' | 'medium' | 'high' }>;
   onRestart: () => void;
 }
+
+const dimensionLabels: Record<string, string> = {
+  work: 'Работа',
+  family: 'Семья',
+  friends: 'Друзья',
+  public: 'Публичные ситуации',
+  digital: 'Цифровые границы',
+  financial: 'Финансы',
+  romantic: 'Партнерские отношения',
+  values: 'Ценности',
+  physical: 'Физический комфорт',
+  time: 'Личное время',
+};
 
 export function QuizResult({
   title,
@@ -20,6 +37,9 @@ export function QuizResult({
   score,
   maxScore,
   quizTitle,
+  dimensionResults,
+  strengths,
+  growthZones,
   onRestart,
 }: QuizResultProps) {
   const copyText = `${quizTitle}\n\nМой результат: ${title} (${score} из ${maxScore})\n\n${description}`;
@@ -46,6 +66,38 @@ export function QuizResult({
       <p className="mx-auto mb-8 max-w-lg text-base leading-relaxed text-text-muted">
         {description}
       </p>
+
+      {(strengths.length > 0 || growthZones.length > 0) && (
+        <div className="mx-auto mb-8 max-w-lg space-y-4 text-left">
+          {strengths.length > 0 && (
+            <div className="rounded-xl border border-white/10 bg-background-soft p-4">
+              <p className="mb-2 text-sm font-medium text-text">Сильные стороны</p>
+              <p className="text-sm leading-relaxed text-text-muted">
+                {strengths
+                  .map((item) => dimensionLabels[item.dimension] ?? item.dimension)
+                  .join(', ')}
+              </p>
+            </div>
+          )}
+          {growthZones.length > 0 && (
+            <div className="rounded-xl border border-white/10 bg-background-soft p-4">
+              <p className="mb-2 text-sm font-medium text-text">Зоны роста</p>
+              <p className="text-sm leading-relaxed text-text-muted">
+                {growthZones
+                  .map((item) => dimensionLabels[item.dimension] ?? item.dimension)
+                  .join(', ')}
+              </p>
+              {dimensionResults && (
+                <p className="mt-2 text-xs leading-relaxed text-text-muted">
+                  {growthZones.some((item) => item.level === 'low')
+                    ? dimensionResults.low.description
+                    : dimensionResults.medium.description}
+                </p>
+              )}
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
         <CopyButton

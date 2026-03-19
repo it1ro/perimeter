@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { m } from 'framer-motion';
 import type { QuizQuestion as QuizQuestionType } from '@/types/test';
 
@@ -11,6 +11,10 @@ interface QuizQuestionProps {
 
 export function QuizQuestion({ question, onAnswer }: QuizQuestionProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const options = useMemo(() => {
+    if (question.shuffleOptions === false) return question.options;
+    return [...question.options].sort(() => Math.random() - 0.5);
+  }, [question.options, question.shuffleOptions]);
 
   const handleSelect = (optionId: string, score: number) => {
     if (selectedId) return;
@@ -25,7 +29,7 @@ export function QuizQuestion({ question, onAnswer }: QuizQuestionProps) {
       </h2>
 
       <div className="flex flex-col gap-3" role="radiogroup" aria-label={question.text}>
-        {question.options.map((option) => {
+        {options.map((option) => {
           const isSelected = selectedId === option.id;
 
           return (
