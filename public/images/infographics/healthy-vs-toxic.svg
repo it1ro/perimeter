@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="800"
+  height="600"
+  viewBox="0 0 800 600"
+  preserveAspectRatio="xMidYMid meet"
+  role="img"
+  aria-labelledby="healthyVsToxicTitle healthyVsToxicDesc"
+>
+  <title id="healthyVsToxicTitle">Здоровые vs токсичные отношения</title>
+  <desc id="healthyVsToxicDesc">Сравнение паттернов в отношениях: безопасность и доверие против непредсказуемости и страха.</desc>
+  <style><![CDATA[
+    text { font-family: sans-serif; }
+  ]]></style>
   <rect width="800" height="600" fill="#111820"/>
-  <rect x="40" y="40" width="720" height="520" rx="24" fill="#0B1014" stroke="#6B8DAE" stroke-opacity="0.3" stroke-width="2"/>
+  <rect x="40" y="40" width="720" height="520" rx="24" fill="#0B1014" stroke="#6B8DAE" stroke-opacity="0.3" stroke-width="2" vector-effect="non-scaling-stroke"/>
   <text x="400" y="100" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="bold" fill="#E5E7EB">Здоровые vs токсичные отношения</text>
-  <line x1="400" y1="130" x2="400" y2="520" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="6 4"/>
+  <line x1="400" y1="130" x2="400" y2="520" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="6 4" vector-effect="non-scaling-stroke"/>
   <text x="220" y="160" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="600" fill="#7C9A8E">Здоровые</text>
   <text x="580" y="160" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="600" fill="#C4836A">Токсичные</text>
   <text x="220" y="210" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#E5E7EB">Безопасность и доверие</text>
@@ -18,5 +31,5 @@
   <text x="580" y="410" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#E5E7EB">Зависимость от партнёра</text>
   <text x="220" y="460" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#E5E7EB">«Я» и «мы» в балансе</text>
   <text x="580" y="460" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#E5E7EB">Потеря себя в отношениях</text>
-  <text x="400" y="510" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#9CA3AF">Узнать границы — первый шаг к здоровым отношениям</text>
+  <text x="400" y="512" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#E5E7EB" fill-opacity="0.75">Узнать границы — первый шаг к здоровым отношениям</text>
 </svg>

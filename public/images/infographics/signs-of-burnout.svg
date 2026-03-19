@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="800"
+  height="600"
+  viewBox="0 0 800 600"
+  preserveAspectRatio="xMidYMid meet"
+  role="img"
+  aria-labelledby="signsOfBurnoutTitle signsOfBurnoutDesc"
+>
+  <title id="signsOfBurnoutTitle">Признаки выгорания</title>
+  <desc id="signsOfBurnoutDesc">Краткая памятка: эмоциональное истощение, деперсонализация, снижение продуктивности и телесные симптомы, а также куда обратиться за поддержкой.</desc>
+  <style><![CDATA[
+    text { font-family: sans-serif; }
+  ]]></style>
   <rect width="800" height="600" fill="#111820"/>
-  <rect x="40" y="40" width="720" height="520" rx="24" fill="#0B1014" stroke="#C4836A" stroke-opacity="0.3" stroke-width="2"/>
+  <rect x="40" y="40" width="720" height="520" rx="24" fill="#0B1014" stroke="#C4836A" stroke-opacity="0.3" stroke-width="2" vector-effect="non-scaling-stroke"/>
   <text x="400" y="100" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="bold" fill="#E5E7EB">Признаки выгорания</text>
-  <rect x="80" y="140" width="290" height="70" rx="12" fill="#C4836A" fill-opacity="0.1" stroke="#C4836A" stroke-opacity="0.25"/>
+  <rect x="80" y="140" width="290" height="70" rx="12" fill="#C4836A" fill-opacity="0.1" stroke="#C4836A" stroke-opacity="0.25" vector-effect="non-scaling-stroke"/>
   <text x="225" y="170" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#C4836A">Эмоциональное истощение</text>
-  <text x="225" y="192" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">Постоянная усталость, опустошение</text>
-  <rect x="430" y="140" width="290" height="70" rx="12" fill="#C4836A" fill-opacity="0.1" stroke="#C4836A" stroke-opacity="0.25"/>
+  <text x="225" y="195" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#E5E7EB" fill-opacity="0.75">Постоянная усталость, опустошение</text>
+  <rect x="430" y="140" width="290" height="70" rx="12" fill="#C4836A" fill-opacity="0.1" stroke="#C4836A" stroke-opacity="0.25" vector-effect="non-scaling-stroke"/>
   <text x="575" y="170" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#C4836A">Деперсонализация</text>
-  <text x="575" y="192" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">Отстранённость, цинизм</text>
-  <rect x="80" y="240" width="290" height="70" rx="12" fill="#C4836A" fill-opacity="0.1" stroke="#C4836A" stroke-opacity="0.25"/>
+  <text x="575" y="195" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#E5E7EB" fill-opacity="0.75">Отстранённость, цинизм</text>
+  <rect x="80" y="240" width="290" height="70" rx="12" fill="#C4836A" fill-opacity="0.1" stroke="#C4836A" stroke-opacity="0.25" vector-effect="non-scaling-stroke"/>
   <text x="225" y="270" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#C4836A">Снижение продуктивности</text>
-  <text x="225" y="292" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">Трудно сосредоточиться</text>
-  <rect x="430" y="240" width="290" height="70" rx="12" fill="#C4836A" fill-opacity="0.1" stroke="#C4836A" stroke-opacity="0.25"/>
+  <text x="225" y="295" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#E5E7EB" fill-opacity="0.75">Трудно сосредоточиться</text>
+  <rect x="430" y="240" width="290" height="70" rx="12" fill="#C4836A" fill-opacity="0.1" stroke="#C4836A" stroke-opacity="0.25" vector-effect="non-scaling-stroke"/>
   <text x="575" y="270" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#C4836A">Телесные симптомы</text>
-  <text x="575" y="292" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">Головные боли, бессонница</text>
-  <rect x="80" y="340" width="290" height="70" rx="12" fill="#7C9A8E" fill-opacity="0.1" stroke="#7C9A8E" stroke-opacity="0.25"/>
+  <text x="575" y="295" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#E5E7EB" fill-opacity="0.75">Головные боли, бессонница</text>
+  <rect x="80" y="340" width="290" height="70" rx="12" fill="#7C9A8E" fill-opacity="0.1" stroke="#7C9A8E" stroke-opacity="0.25" vector-effect="non-scaling-stroke"/>
   <text x="225" y="370" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#7C9A8E">Что делать?</text>
-  <text x="225" y="392" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">Отдых, границы, поддержка</text>
-  <rect x="430" y="340" width="290" height="70" rx="12" fill="#7C9A8E" fill-opacity="0.1" stroke="#7C9A8E" stroke-opacity="0.25"/>
+  <text x="225" y="395" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#E5E7EB" fill-opacity="0.75">Отдых, границы, поддержка</text>
+  <rect x="430" y="340" width="290" height="70" rx="12" fill="#7C9A8E" fill-opacity="0.1" stroke="#7C9A8E" stroke-opacity="0.25" vector-effect="non-scaling-stroke"/>
   <text x="575" y="370" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="#7C9A8E">Куда обращаться?</text>
-  <text x="575" y="392" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9CA3AF">Психотерапевт, врач</text>
-  <text x="400" y="480" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#9CA3AF">Выгорание — не слабость. Чем раньше заметите, тем проще восстановиться.</text>
+  <text x="575" y="395" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#E5E7EB" fill-opacity="0.75">Психотерапевт, врач</text>
+  <text x="400" y="482" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#E5E7EB" fill-opacity="0.75">Выгорание — не слабость. Чем раньше заметите, тем проще восстановиться.</text>
 </svg>

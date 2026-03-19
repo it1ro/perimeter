@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="800"
+  height="600"
+  viewBox="0 0 800 600"
+  preserveAspectRatio="xMidYMid meet"
+  role="img"
+  aria-labelledby="anxietyCycleTitle anxietyCycleDesc"
+>
+  <title id="anxietyCycleTitle">Цикл тревожности</title>
+  <desc id="anxietyCycleDesc">Схема замкнутого круга тревоги: триггер приводит к тревожным мыслям, реакции тела и избеганию.</desc>
+  <style><![CDATA[
+    text { font-family: sans-serif; }
+  ]]></style>
   <rect width="800" height="600" fill="#111820"/>
-  <rect x="40" y="40" width="720" height="520" rx="24" fill="#0B1014" stroke="#6B8DAE" stroke-opacity="0.3" stroke-width="2"/>
+  <rect x="40" y="40" width="720" height="520" rx="24" fill="#0B1014" stroke="#6B8DAE" stroke-opacity="0.3" stroke-width="2" vector-effect="non-scaling-stroke"/>
   <text x="400" y="95" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="bold" fill="#E5E7EB">Цикл тревожности</text>
-  <circle cx="400" cy="320" r="160" fill="none" stroke="#6B8DAE" stroke-opacity="0.2" stroke-width="2" stroke-dasharray="8 4"/>
-  <rect x="340" y="140" width="120" height="50" rx="12" fill="#6B8DAE" fill-opacity="0.15" stroke="#6B8DAE" stroke-opacity="0.4"/>
+  <circle cx="400" cy="320" r="160" fill="none" stroke="#6B8DAE" stroke-opacity="0.2" stroke-width="2" stroke-dasharray="8 4" vector-effect="non-scaling-stroke"/>
+  <rect x="340" y="140" width="120" height="50" rx="12" fill="#6B8DAE" fill-opacity="0.15" stroke="#6B8DAE" stroke-opacity="0.4" vector-effect="non-scaling-stroke"/>
   <text x="400" y="170" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#6B8DAE">Триггер</text>
-  <rect x="520" y="245" width="140" height="50" rx="12" fill="#C4836A" fill-opacity="0.15" stroke="#C4836A" stroke-opacity="0.4"/>
-  <text x="590" y="275" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#C4836A">Тревожные мысли</text>
-  <rect x="500" y="380" width="150" height="50" rx="12" fill="#C4836A" fill-opacity="0.15" stroke="#C4836A" stroke-opacity="0.4"/>
-  <text x="575" y="410" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#C4836A">Тело. Реакция</text>
-  <rect x="310" y="440" width="180" height="50" rx="12" fill="#C4836A" fill-opacity="0.15" stroke="#C4836A" stroke-opacity="0.4"/>
-  <text x="400" y="470" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#C4836A">Избегание повторяется</text>
-  <rect x="140" y="380" width="170" height="50" rx="12" fill="#C4836A" fill-opacity="0.15" stroke="#C4836A" stroke-opacity="0.4"/>
-  <text x="225" y="410" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#C4836A">Делаете — выгорание</text>
-  <rect x="140" y="245" width="150" height="50" rx="12" fill="#7C9A8E" fill-opacity="0.15" stroke="#7C9A8E" stroke-opacity="0.4"/>
-  <text x="215" y="275" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#7C9A8E">Возврат к тревоге</text>
-  <text x="400" y="540" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#9CA3AF">Чтобы разорвать цикл — осознание, практики и поддержка в терапии</text>
+  <rect x="520" y="245" width="140" height="50" rx="12" fill="#C4836A" fill-opacity="0.15" stroke="#C4836A" stroke-opacity="0.4" vector-effect="non-scaling-stroke"/>
+  <text x="590" y="277" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#C4836A">Тревожные мысли</text>
+  <rect x="500" y="380" width="150" height="50" rx="12" fill="#C4836A" fill-opacity="0.15" stroke="#C4836A" stroke-opacity="0.4" vector-effect="non-scaling-stroke"/>
+  <text x="575" y="412" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#C4836A">Тело. Реакция</text>
+  <rect x="310" y="440" width="180" height="50" rx="12" fill="#C4836A" fill-opacity="0.15" stroke="#C4836A" stroke-opacity="0.4" vector-effect="non-scaling-stroke"/>
+  <text x="400" y="472" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#C4836A">Избегание повторяется</text>
+  <rect x="140" y="380" width="170" height="50" rx="12" fill="#C4836A" fill-opacity="0.15" stroke="#C4836A" stroke-opacity="0.4" vector-effect="non-scaling-stroke"/>
+  <text x="225" y="412" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#C4836A">Делаете — выгорание</text>
+  <rect x="140" y="245" width="150" height="50" rx="12" fill="#7C9A8E" fill-opacity="0.15" stroke="#7C9A8E" stroke-opacity="0.4" vector-effect="non-scaling-stroke"/>
+  <text x="215" y="277" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#7C9A8E">Возврат к тревоге</text>
+  <text x="400" y="542" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#E5E7EB" fill-opacity="0.75">Чтобы разорвать цикл — осознание, практики и поддержка в терапии</text>
 </svg>
