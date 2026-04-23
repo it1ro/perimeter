@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+ :root {
   --color-sage: #7c9a8e;
   --color-blue: #6b8dae;
   --color-terracotta: #c4836a;
@@ -33,7 +33,7 @@ button {
   cursor: pointer;
 }
 
-:focus-visible {
+ :focus-visible {
   outline: 2px solid var(--color-sage);
   outline-offset: 2px;
 }

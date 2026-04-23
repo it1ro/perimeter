@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { MobileMenu } from './MobileMenu';
@@ -11,6 +11,11 @@ export function Header() {
   const pathname = usePathname();
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
+
+  useEffect(() => {
+    // При навигации меню должно закрываться, чтобы не оставаться поверх нового контента.
+    setMenuOpen(false);
+  }, [pathname]);
 
   return (
     <header className="sticky top-0 z-30 border-b border-white/10 bg-background/80 backdrop-blur-md">

@@ -29,23 +29,28 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     <>
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
-          isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
+        className={`fixed inset-0 z-[90] bg-black/30 backdrop-blur-2xl transition-opacity duration-300 ${
+          isOpen ? 'opacity-100 pointer-events-auto' : 'pointer-events-none opacity-0'
         }`}
         onClick={onClose}
-        aria-hidden="true"
+        aria-hidden={!isOpen}
       />
 
       {/* Drawer */}
       <div
-        className={`fixed inset-y-0 right-0 z-50 w-72 bg-background-soft shadow-2xl transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed inset-0 z-[100] flex flex-col transition-opacity duration-300 ease-in-out ${
+          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         role="dialog"
         aria-modal="true"
         aria-label="Мобильное меню"
       >
-        <div className="flex h-16 items-center justify-between border-b border-white/10 px-5">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-background-soft/25 backdrop-blur-2xl pointer-events-none"
+        />
+
+        <div className="relative flex h-16 items-center justify-between border-b border-white/10 px-5">
           <span className="text-sm font-medium text-text-muted">Меню</span>
           <button
             onClick={onClose}
@@ -69,14 +74,17 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           </button>
         </div>
 
-        <nav aria-label="Мобильная навигация" className="flex flex-col gap-1 p-4">
+        <nav
+          aria-label="Мобильная навигация"
+          className="relative flex flex-1 flex-col gap-2 overflow-y-auto p-6"
+        >
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={onClose}
               className={[
-                'rounded-lg px-4 py-3 text-base font-medium transition-colors',
+                'rounded-xl px-4 py-3 text-base font-medium transition-colors',
                 isActive(link.href)
                   ? 'bg-sage/15 text-sage'
                   : 'text-text hover:bg-white/10 hover:text-sage',
